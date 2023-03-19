@@ -1,0 +1,16 @@
+section{
+    display: flex;
+    margin: auto;
+} 
+
+section main header ul{
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+section main header{
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+}
