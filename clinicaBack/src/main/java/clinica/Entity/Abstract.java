@@ -13,7 +13,7 @@ import java.util.List;
 
 @MappedSuperclass
 @Getter @Setter
-public class AbtractEntity implements UserDetails {
+public class Abstract implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

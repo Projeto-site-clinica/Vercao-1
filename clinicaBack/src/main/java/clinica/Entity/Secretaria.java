@@ -1,13 +1,15 @@
 package clinica.Entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="usuario",schema = "public")
+@Table(name="secretaria",schema = "public")
 @Getter @Setter
-public class PacienteEntity extends AbtractEntity {
+public class Secretaria extends Abstract {
 
     @Column(name = "rg",unique = true,nullable = false)
     private String rg;

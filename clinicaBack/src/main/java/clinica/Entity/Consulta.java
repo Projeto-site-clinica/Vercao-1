@@ -3,12 +3,13 @@ package clinica.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="consultas",schema = "public")
+@Table(name="consulta",schema = "public")
 @Getter @Setter
-public class ConsultasEntity {
+public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,11 +21,11 @@ public class ConsultasEntity {
     private String nomeConsulta;
 
     @Column(name = "valor")
-    private Double valor;
+    private double valor;
 
     @Column(name = "discricao")
-    private String discricao;
+    private String descricao;
 
     @Column(name = "tempo")
-    private LocalTime tempo;
+    private LocalDateTime tempo;
 }

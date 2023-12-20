@@ -1,9 +1,6 @@
 package clinica.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalTime;
@@ -12,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name="doutor",schema = "public")
 @Getter @Setter
-public class DoutorEntity extends AbtractEntity{
+public class Doutor extends Abstract {
 
     @Column(name = "rg",unique = true,nullable = false)
     private String rg;
@@ -35,15 +32,11 @@ public class DoutorEntity extends AbtractEntity{
     @Column(name = "solicitacao")
     private Boolean solicitacao = false;
 
-    @ManyToMany(mappedBy = "doutores")
     @Column(name = "clinica_id")
-    private ClinicaEntity clinicaId;
+    private Clinica clinicaId;
 
-    @Column(name = "consultas")
-    private List<ConsultasEntity> consultas;
-
-    @Column(name = "horario",nullable = false)
-    private List<CalendarioEntity> calendario;
+    @Column(name = "consulta")
+    private List<Consulta> consulta;
 
     @Column(name = "horario",nullable = false)
     private LocalTime horarioStart;
