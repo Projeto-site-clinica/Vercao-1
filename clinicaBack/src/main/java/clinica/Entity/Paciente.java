@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="usuario",schema = "public")
+@Table(name="paciente",schema = "public")
 @Getter @Setter
 public class Paciente extends Abstract {
 

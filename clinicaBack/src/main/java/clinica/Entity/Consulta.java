@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class Consulta {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ativo")
     private Boolean ativo = true;
 
-    @Column(name = "nome")
+    @Column(name = "nome",nullable = false)
     private String nomeConsulta;
 
-    @Column(name = "valor")
-    private double valor;
+    @Column(name = "valor",nullable = false)
+    private Double valor;
 
-    @Column(name = "discricao")
+    @Column(name = "descricao",nullable = false)
     private String descricao;
 
-    @Column(name = "tempo")
+    @Column(name = "tempo",nullable = false)
     private LocalDateTime tempo;
 }

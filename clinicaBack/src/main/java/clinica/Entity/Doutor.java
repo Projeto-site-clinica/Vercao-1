@@ -26,22 +26,24 @@ public class Doutor extends Abstract {
     @Column(name = "avaliacao")
     private Double avaliacao;
 
-    @Column(name = "discricao",nullable = false)
-    private String discricao;
+    @Column(name = "descricao",nullable = false)
+    private String descricao;
 
     @Column(name = "solicitacao")
     private Boolean solicitacao = false;
 
-    @Column(name = "clinica_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn( name = "clinica_id")
     private Clinica clinicaId;
 
-    @Column(name = "consulta")
+    @OneToMany
+    @JoinColumn(name = "consulta")
     private List<Consulta> consulta;
 
-    @Column(name = "horario",nullable = false)
+    @Column(name = "horario_start",nullable = false)
     private LocalTime horarioStart;
 
-    @Column(name = "horario",nullable = false)
+    @Column(name = "horario_end",nullable = false)
     private LocalTime horarioEnd;
 
 //    @Column(name = "perfis")

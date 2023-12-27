@@ -6,12 +6,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="doutor",schema = "public")
+@Table(name="calendario",schema = "public")
 @Getter @Setter
 public class Calendario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ativo")

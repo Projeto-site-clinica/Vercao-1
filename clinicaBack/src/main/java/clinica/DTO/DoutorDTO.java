@@ -18,7 +18,7 @@ public class DoutorDTO extends AbstractDTO{
 
     private Double avaliacao;
 
-    private String discricao;
+    private String descricao;
 
     private Boolean solicitacao = false;
 

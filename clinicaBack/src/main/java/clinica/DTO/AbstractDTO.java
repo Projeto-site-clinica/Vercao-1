@@ -23,7 +23,7 @@ public class AbstractDTO {
     private String role;
 
     //endereco
-    private String cep;
+    private int cep;
 
     private String estado;
 
@@ -33,7 +33,7 @@ public class AbstractDTO {
 
     private String bairro;
 
-    private Number numero;
+    private int numero;
 
     private String complemento;
 

@@ -10,4 +10,6 @@ public class SecretariaDTO extends AbstractDTO {
     private String cpf;
 
     private String dataNacimento;
+
+    private ClinicaDTO clinicaId;
 }

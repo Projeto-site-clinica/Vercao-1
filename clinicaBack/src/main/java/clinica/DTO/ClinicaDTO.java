@@ -11,11 +11,11 @@ public class ClinicaDTO extends AbstractDTO{
 
     private Double avaliacao;
 
-    private String discricao;
+    private String descricao;
 
     private Boolean solicitacao = false;
 
     private List<DoutorDTO> doutores;
 
-    private List<SecretariaDTO> secretaria;
+    private List<SecretariaDTO> secretarias;
 }

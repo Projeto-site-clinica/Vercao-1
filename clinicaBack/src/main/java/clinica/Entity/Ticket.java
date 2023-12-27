@@ -11,24 +11,28 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ativo")
     private Boolean ativo = true;
 
-    @Column(name = "paciente_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paciente_id",nullable = false)
     private Paciente pacienteId;
 
-    @Column(name = "doutor_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doutor_id",nullable = false)
     private Doutor doutorId;
 
     @Column(name = "log_marcar",nullable = false)
     private LocalDateTime logMarcar;
 
-    @Column(name = "data",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "data",nullable = false)
     private Calendario data;
 
-    @Column(name = "consulta",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "consulta",nullable = false)
     private Consulta consulta;
 }

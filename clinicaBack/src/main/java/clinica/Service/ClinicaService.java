@@ -69,7 +69,7 @@ public class ClinicaService {
 
         clinicaDTO.setCnpj(clinica.getCnpj());
         clinicaDTO.setAvaliacao(clinica.getAvaliacao());
-        clinicaDTO.setDiscricao(clinica.getDiscricao());
+        clinicaDTO.setDescricao(clinica.getDescricao());
         clinicaDTO.setSolicitacao(clinica.getSolicitacao());
 
         List<DoutorDTO> listaDou = new ArrayList<>();
@@ -80,11 +80,11 @@ public class ClinicaService {
         clinicaDTO.setDoutores(listaDou);
 
         List<SecretariaDTO> listaSec = new ArrayList<>();
-        if(clinica.getSecretaria() != null)
-            for(int i=0; i<clinica.getSecretaria().size(); i++){
-                listaSec.add(secretariaToDTO(clinica.getSecretaria().get(i)));
+        if(clinica.getSecretarias() != null)
+            for(int i=0; i<clinica.getSecretarias().size(); i++){
+                listaSec.add(secretariaToDTO(clinica.getSecretarias().get(i)));
             }
-        clinicaDTO.setSecretaria(listaSec);
+        clinicaDTO.setSecretarias(listaSec);
 
         return clinicaDTO;
     }
@@ -139,7 +139,7 @@ public class ClinicaService {
         doutorDTO.setDataNacimento(doutor.getDataNacimento());
         doutorDTO.setFormacao(doutor.getFormacao());
         doutorDTO.setAvaliacao(doutor.getAvaliacao());
-        doutorDTO.setDiscricao(doutor.getDiscricao());
+        doutorDTO.setDescricao(doutor.getDescricao());
         doutorDTO.setSolicitacao(doutor.getSolicitacao());
         doutorDTO.setHorarioStart(doutor.getHorarioStart());
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
@@ -192,7 +192,7 @@ public class ClinicaService {
 
         novoClinica.setCnpj(clinicaDTO.getCnpj());
         novoClinica.setAvaliacao(clinicaDTO.getAvaliacao());
-        novoClinica.setDiscricao(clinicaDTO.getDiscricao());
+        novoClinica.setDescricao(clinicaDTO.getDescricao());
         novoClinica.setSolicitacao(clinicaDTO.getSolicitacao());
 
         List<Doutor> listaDou = new ArrayList<>();
@@ -203,11 +203,11 @@ public class ClinicaService {
         novoClinica.setDoutores(listaDou);
 
         List<Secretaria> listaSec = new ArrayList<>();
-        if(clinicaDTO.getSecretaria() != null)
-            for(int i=0; i<clinicaDTO.getSecretaria().size(); i++){
-                listaSec.add(toSecretaria(novoClinica,clinicaDTO.getSecretaria().get(i)));
+        if(clinicaDTO.getSecretarias() != null)
+            for(int i=0; i<clinicaDTO.getSecretarias().size(); i++){
+                listaSec.add(toSecretaria(novoClinica,clinicaDTO.getSecretarias().get(i)));
             }
-        novoClinica.setSecretaria(listaSec);
+        novoClinica.setSecretarias(listaSec);
 
         return novoClinica;
     }
@@ -262,7 +262,7 @@ public class ClinicaService {
         novoDoutor.setDataNacimento(doutorDTO.getDataNacimento());
         novoDoutor.setFormacao(doutorDTO.getFormacao());
         novoDoutor.setAvaliacao(doutorDTO.getAvaliacao());
-        novoDoutor.setDiscricao(doutorDTO.getDiscricao());
+        novoDoutor.setDescricao(doutorDTO.getDescricao());
         novoDoutor.setSolicitacao(doutorDTO.getSolicitacao());
         novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());

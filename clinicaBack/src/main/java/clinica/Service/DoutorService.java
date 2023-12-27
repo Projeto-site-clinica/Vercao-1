@@ -77,7 +77,7 @@ public class DoutorService {
         doutorDTO.setDataNacimento(doutor.getDataNacimento());
         doutorDTO.setFormacao(doutor.getFormacao());
         doutorDTO.setAvaliacao(doutor.getAvaliacao());
-        doutorDTO.setDiscricao(doutor.getDiscricao());
+        doutorDTO.setDescricao(doutor.getDescricao());
         doutorDTO.setSolicitacao(doutor.getSolicitacao());
         doutorDTO.setHorarioStart(doutor.getHorarioStart());
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
@@ -133,7 +133,7 @@ public class DoutorService {
         novoDoutor.setDataNacimento(doutorDTO.getDataNacimento());
         novoDoutor.setFormacao(doutorDTO.getFormacao());
         novoDoutor.setAvaliacao(doutorDTO.getAvaliacao());
-        novoDoutor.setDiscricao(doutorDTO.getDiscricao());
+        novoDoutor.setDescricao(doutorDTO.getDescricao());
         novoDoutor.setSolicitacao(doutorDTO.getSolicitacao());
         novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
