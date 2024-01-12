@@ -13,6 +13,10 @@ export class PacienteService {
 
   constructor() { }
 
+  buscarPorId(id: number): Observable<Paciente> {
+    return this.http.get<Paciente>(this.API + "/" + `${id}`);
+  }
+
   listar(): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(`${this.API}` + "/lista");
   }

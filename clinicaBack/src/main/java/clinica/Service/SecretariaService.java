@@ -7,6 +7,7 @@ import clinica.Repository.SecretariaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class SecretariaService {
     @Autowired
     private SecretariaRepository secretariaRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public SecretariaDTO findSecretariaById(Long id) {
         Secretaria secretaria = secretariaRepository.findById(id)
@@ -28,11 +31,14 @@ public class SecretariaService {
 
     public MensagemDTO cadastrarSecretaria(SecretariaDTO secretariaDTO) {
         Secretaria secretaria = toSecretaria(secretariaDTO);
+        secretaria.setPassword(passwordEncoder.encode(secretaria.getPassword()));
         secretariaRepository.save(secretaria);
-        return new MensagemDTO("Secretaria cadastrado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Secretaria cadastrada com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarSecretaria(Long id, SecretariaDTO secretariaDTO) {
         Secretaria secretaria = toSecretaria(secretariaDTO);
+        String senha= secretariaRepository.findSenhaById(secretaria.getId());
+        secretaria.setPassword(senha);
         secretariaRepository.save(secretaria);
         return new MensagemDTO("Secretaria atualizado com sucesso!", HttpStatus.CREATED);
     }

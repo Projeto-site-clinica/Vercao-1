@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="paciente",schema = "public")
+@PrimaryKeyJoinColumn(name = "id_paciente")
 @Getter @Setter
-public class Paciente extends Abstract {
+public class Paciente extends Usuario {
 
     @Column(name = "rg",unique = true,nullable = false)
     private String rg;

@@ -1,9 +1,10 @@
-export class Abstract {
+export class Usuario {
     id!: number;
     username!: string;
     celular!: string;
     email!: string;
     password!: string;
+    token!: string;
     role!: string;
     cep!: number;
     estado!: string;

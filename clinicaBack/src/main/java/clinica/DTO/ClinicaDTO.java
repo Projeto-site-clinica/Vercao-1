@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class ClinicaDTO extends AbstractDTO{
+public class ClinicaDTO extends UsuarioDTO {
     private String cnpj;
 
     private Double avaliacao;

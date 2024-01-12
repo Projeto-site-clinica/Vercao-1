@@ -11,4 +11,7 @@ import java.util.List;
 public interface SecretariaRepository extends JpaRepository<Secretaria, Long> {
     @Query("FROM Secretaria WHERE ativo = true")
     List<Secretaria> findSecretariaByAtivo();
+
+    @Query(value = "SELECT password FROM secretaria WHERE id = :id",nativeQuery = true)
+    String findSenhaById(Long id);
 }

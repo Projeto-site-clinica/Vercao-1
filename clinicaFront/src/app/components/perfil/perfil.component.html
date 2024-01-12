@@ -1,0 +1,7 @@
+<div *ngIf="loginService.getUser().role == 'PACIENTE'">
+    <p>CPF do Paciente: {{paciente.cpf}}</p>
+</div>
+
+<div *ngIf="loginService.getUser().role == 'DOUTOR'">
+    <p>RG do Doutor: {{doutor.rg}}</p>
+</div>

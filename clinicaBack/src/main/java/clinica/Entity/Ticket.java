@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="ticket",schema = "public")
 @Getter @Setter
 public class Ticket {
     @Id

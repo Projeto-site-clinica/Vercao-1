@@ -1,9 +1,6 @@
 package clinica.Service;
 
-import clinica.DTO.ClinicaDTO;
-import clinica.DTO.ConsultaDTO;
-import clinica.DTO.DoutorDTO;
-import clinica.DTO.MensagemDTO;
+import clinica.DTO.*;
 import clinica.Entity.Clinica;
 import clinica.Entity.Consulta;
 import clinica.Entity.Doutor;
@@ -11,6 +8,7 @@ import clinica.Repository.DoutorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +18,8 @@ import java.util.List;
 public class DoutorService {
     @Autowired
     private DoutorRepository doutorRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public DoutorDTO findDoutorById(Long id) {
         Doutor doutor = doutorRepository.findById(id)
@@ -33,13 +33,16 @@ public class DoutorService {
 
     public MensagemDTO cadastrarDoutor(DoutorDTO doutorDTO) {
         Doutor doutor = toDoutor(doutorDTO);
+        doutor.setPassword(passwordEncoder.encode(doutor.getPassword()));
         doutorRepository.save(doutor);
-        return new MensagemDTO("Doutor cadastrado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarDoutor(Long id, DoutorDTO doutorDTO) {
         Doutor doutor = toDoutor(doutorDTO);
+        String senha= doutorRepository.findSenhaById(doutor.getId());
+        doutor.setPassword(senha);
         doutorRepository.save(doutor);
-        return new MensagemDTO("Doutor atualizado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Paciente atualizado com sucesso!", HttpStatus.CREATED);
     }
 
     public MensagemDTO deletar(Long id) {
@@ -138,9 +141,11 @@ public class DoutorService {
         novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
 
-        Clinica clinica = new Clinica();
-        clinica.setId(doutorDTO.getClinicaId().getId());
-        novoDoutor.setClinicaId(clinica);
+        if (doutorDTO.getClinicaId() != null) {
+            Clinica clinica = new Clinica();
+            clinica.setId(doutorDTO.getClinicaId().getId());
+            novoDoutor.setClinicaId(clinica);
+        }
 
         List<Consulta> listaCons = new ArrayList<>();
         if(doutorDTO.getConsulta() != null)

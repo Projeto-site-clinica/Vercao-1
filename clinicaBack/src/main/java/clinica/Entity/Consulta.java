@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="consulta",schema = "public")
 @Getter @Setter
 public class Consulta {
     @Id
@@ -28,4 +27,6 @@ public class Consulta {
 
     @Column(name = "tempo",nullable = false)
     private LocalDateTime tempo;
+
+    //intervalo
 }

@@ -6,7 +6,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="calendario",schema = "public")
 @Getter @Setter
 public class Calendario {
 

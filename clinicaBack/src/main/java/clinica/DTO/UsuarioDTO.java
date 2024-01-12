@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @MappedSuperclass
 @Getter @Setter
-public class AbstractDTO {
+public class UsuarioDTO {
     private Long id;
 
     private Boolean ativo = true;
@@ -19,6 +19,8 @@ public class AbstractDTO {
     private String email;
 
     private String password;
+
+    private String token;
 
     private String role;
 

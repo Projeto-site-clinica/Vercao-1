@@ -13,6 +13,10 @@ export class SecretariaService {
 
   constructor() { }
 
+  buscarPorId(id: number): Observable<Secretaria> {
+    return this.http.get<Secretaria>(this.API + "/" + `${id}`);
+  }
+
   listar(): Observable<Secretaria[]> {
     return this.http.get<Secretaria[]>(`${this.API}` + "/lista");
   }

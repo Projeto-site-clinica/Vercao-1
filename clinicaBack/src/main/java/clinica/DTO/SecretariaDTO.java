@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class SecretariaDTO extends AbstractDTO {
+public class SecretariaDTO extends UsuarioDTO {
     private String rg;
 
     private String cpf;

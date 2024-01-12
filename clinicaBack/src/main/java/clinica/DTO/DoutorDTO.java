@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Getter @Setter
-public class DoutorDTO extends AbstractDTO{
+public class DoutorDTO extends UsuarioDTO {
     private String rg;
 
     private String cpf;

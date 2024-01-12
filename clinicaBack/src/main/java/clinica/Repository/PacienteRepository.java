@@ -11,4 +11,7 @@ import java.util.List;
 public interface PacienteRepository extends JpaRepository<Paciente,Long> {
     @Query("FROM Paciente WHERE ativo = true")
     List<Paciente> findPacienteByAtivo();
+
+    @Query(value = "SELECT password FROM paciente WHERE id = :id",nativeQuery = true)
+    String findSenhaById(Long id);
 }

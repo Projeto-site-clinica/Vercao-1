@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class PacienteDTO extends AbstractDTO{
+public class PacienteDTO extends UsuarioDTO {
+
     private String rg;
 
     private String cpf;

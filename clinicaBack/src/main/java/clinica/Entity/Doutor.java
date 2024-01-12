@@ -7,9 +7,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name="doutor",schema = "public")
+@PrimaryKeyJoinColumn(name = "id_doutor")
 @Getter @Setter
-public class Doutor extends Abstract {
+public class Doutor extends Usuario {
 
     @Column(name = "rg",unique = true,nullable = false)
     private String rg;

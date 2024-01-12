@@ -1,8 +1,8 @@
-import { Abstract } from "./abstract";
+import { Usuario } from "./usuario";
 import { Doutor } from "./doutor";
 import { Secretaria } from "./secretaria";
 
-export class Clinica extends Abstract{
+export class Clinica extends Usuario{
     cnpj!: string;
     avaliacao!: number;
     descricao!: string;

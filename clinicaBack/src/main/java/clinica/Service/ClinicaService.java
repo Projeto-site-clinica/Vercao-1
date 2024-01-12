@@ -6,6 +6,7 @@ import clinica.Repository.ClinicaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ClinicaService {
     @Autowired
     private ClinicaRepository clinicaRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ClinicaDTO findClinicaById(Long id) {
         Clinica clinica = clinicaRepository.findById(id)
@@ -28,13 +31,16 @@ public class ClinicaService {
 
     public MensagemDTO cadastrarClinica(ClinicaDTO clinicaDTO) {
         Clinica clinica = toClinica(clinicaDTO);
+        clinica.setPassword(passwordEncoder.encode(clinica.getPassword()));
         clinicaRepository.save(clinica);
-        return new MensagemDTO("Clinica cadastrado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Clinica cadastrada com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarClinica(Long id, ClinicaDTO clinicaDTO) {
         Clinica clinica = toClinica(clinicaDTO);
+        String senha= clinicaRepository.findSenhaById(clinica.getId());
+        clinica.setPassword(senha);
         clinicaRepository.save(clinica);
-        return new MensagemDTO("Clinica atualizado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Clinica atualizada com sucesso!", HttpStatus.CREATED);
     }
 
     public MensagemDTO deletar(Long id) {

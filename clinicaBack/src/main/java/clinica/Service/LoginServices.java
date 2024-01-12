@@ -1,110 +1,108 @@
-//package clinica.Service;
+package clinica.Service;
+
+import clinica.Config.JwtServiceGenerator;
+import clinica.DTO.*;
+import clinica.Entity.*;
+import clinica.Repository.LoginRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoginServices {
+
+    @Autowired
+    private LoginRepository loginRepository;
+    @Autowired
+    private JwtServiceGenerator jwtService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    public UsuarioDTO logar(LoginDTO loginDTO) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.getUsername(),
+                        loginDTO.getSenha()
+                )
+        );
+
+        Usuario usuario = loginRepository.findByUsername(loginDTO.getUsername()).orElse(null);
+        if (usuario != null) {
+            var jwtToken = jwtService.generateToken(usuario);
+            return toUsuarioDTO(usuario, jwtToken);
+        }
 //
-//import clinica.Config.JwtServiceGenerator;
-//import clinica.DTO.LoginDTO;
-//import clinica.DTO.MensagemDTO;
-//import clinica.DTO.PacienteDTO;
-//import clinica.Entity.Paciente;
-//import clinica.Repository.LoginRepository;
-//import jakarta.persistence.EntityNotFoundException;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Service;
+//        Clinica clinica = loginRepository.findByUsernameClinica(loginDTO.getUsername()).orElse(null);
+//        if (clinica != null) {
+//            var jwtTokenClinica = jwtService.generateTokenClinica(clinica);
+//            return toClinicaDTO(clinica, jwtTokenClinica);
+//        }
 //
-//import java.util.List;
+//        Doutor doutor = loginRepository.findByUsernameDoutor(loginDTO.getUsername()).orElse(null);
+//        if (doutor != null) {
+//            var jwtTokenDoutor = jwtService.generateTokenDoutor(doutor);
+//            return toDoutorDTO(doutor, jwtTokenDoutor);
+//        }
 //
+//        Secretaria secretaria = loginRepository.findByUsernameSecretaria(loginDTO.getUsername()).orElse(null);
+//        if (secretaria != null) {
+//            var jwtTokenSecretaria = jwtService.generateTokenSecretaria(secretaria);
+//            return toSecretariaDTO(secretaria, jwtTokenSecretaria);
+//        }
+
+        throw new UsernameNotFoundException("Usuário não encontrado");
+    }
+
+    private UsuarioDTO toUsuarioDTO(Usuario usuario, String token) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+
+        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setRole(usuario.getRole());
+        usuarioDTO.setPassword(null);
+        usuarioDTO.setToken(token);
+        usuarioDTO.setUsername(usuario.getUsername());
+        return usuarioDTO;
+    }
+
+//    private ClinicaDTO toClinicaDTO(Clinica clinica, String token) {
+//        ClinicaDTO clinicaDTO = new ClinicaDTO();
 //
-//@Service
-//public class LoginServices {
+//        clinicaDTO.setId(clinica.getId());
+//        clinicaDTO.setRole(clinica.getRole());
+//        clinicaDTO.setPassword(null);
+//        clinicaDTO.setToken(token);
+//        clinicaDTO.setUsername(clinica.getUsername());
 //
-//    @Autowired
-//    private LoginRepository loginRepository;
-//    @Autowired
-//    private JwtServiceGenerator jwtService;
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
-//
-//    public PacienteDTO logar(LoginDTO loginDTO) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginDTO.getUsername(),
-//                        loginDTO.getPassword()
-//                )
-//        );
-//        Paciente paciente = loginRepository.findByUsername(loginDTO.getUsername()).orElseThrow();
-//        var jwtToken = jwtService.generateToken(paciente);
-//
-//        return toPacienteDTO(paciente, jwtToken);
+//        return clinicaDTO;
 //    }
 //
-//    public List<PacienteDTO> listar() {
-//        return loginRepository.findUserByAtivo().stream().map(this::pacienteToDTO).toList();
+//    private DoutorDTO toDoutorDTO(Doutor doutor, String token) {
+//        DoutorDTO doutorDTO = new DoutorDTO();
+//
+//        doutorDTO.setId(doutor.getId());
+//        doutorDTO.setRole(doutor.getRole());
+//        doutorDTO.setPassword(null);
+//        doutorDTO.setToken(token);
+//        doutorDTO.setUsername(doutor.getUsername());
+//
+//        return doutorDTO;
 //    }
 //
-//    public MensagemDTO cadastrarUser(PacienteDTO pacienteDTO) {
-//        Paciente paciente = toUser(pacienteDTO);
-//        paciente.setPassword(passwordEncoder.encode(paciente.getPassword()));
-//        loginRepository.save(paciente);
-//        return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
+//    private SecretariaDTO toSecretariaDTO(Secretaria secretaria, String token) {
+//        SecretariaDTO secretariaDTO = new SecretariaDTO();
+//
+//        secretariaDTO.setId(secretaria.getId());
+//        secretariaDTO.setRole(secretaria.getRole());
+//        secretariaDTO.setPassword(null);
+//        secretariaDTO.setToken(token);
+//        secretariaDTO.setUsername(secretaria.getUsername());
+//
+//        return secretariaDTO;
 //    }
-//    public MensagemDTO editarUser(Long id, PacienteDTO pacienteDTO) {
-//        Paciente paciente = toUser(pacienteDTO);
-//        String senha= loginRepository.findSenhaById(paciente.getId());
-//        paciente.setPassword(senha);
-//        loginRepository.save(paciente);
-//        return new MensagemDTO("Paciente atualizado com sucesso!", HttpStatus.CREATED);
-//    }
-//
-//    public MensagemDTO deletar(Long id) {
-//        Paciente pacienteBanco = loginRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não existe!"));
-//        desativarUser(pacienteBanco);
-//
-//        return new MensagemDTO("Paciente deletado com sucesso!", HttpStatus.CREATED);
-//    }
-//
-//    private void desativarUser(Paciente paciente) {
-//        paciente.setAtivo(false);
-//        loginRepository.save(paciente);
-//    }
-//
-//    public PacienteDTO pacienteToDTO(Paciente paciente){
-//        PacienteDTO pacienteDTO = new PacienteDTO();
-//
-//        pacienteDTO.setId(paciente.getId());
-//        pacienteDTO.setAtivo(paciente.getAtivo());
-//        pacienteDTO.setUsername(paciente.getUsername());
-//       // pacienteDTO.setPassword(paciente.getPassword());
-//        pacienteDTO.setRole(paciente.getRole());
-//
-//        return pacienteDTO;
-//    }
-//    public Paciente toUser(PacienteDTO pacienteDTO){
-//        Paciente novoUser = new Paciente();
-//
-//        novoUser.setId(pacienteDTO.getId());
-//        novoUser.setAtivo(pacienteDTO.getAtivo());
-//        novoUser.setUsername(pacienteDTO.getUsername());
-//        novoUser.setPassword(pacienteDTO.getPassword());
-//        novoUser.setRole(pacienteDTO.getRole());
-//
-//        return novoUser;
-//    }
-//
-//
-//    private PacienteDTO toPacienteDTO(Paciente paciente, String token) {
-//        PacienteDTO pacienteDTO = new PacienteDTO();
-//        pacienteDTO.setId(paciente.getId());
-//        pacienteDTO.setRole(paciente.getRole());
-//        pacienteDTO.setPassword(token);
-//        pacienteDTO.setUsername(paciente.getUsername());
-//        return pacienteDTO;
-//    }
-//
-//}
+}

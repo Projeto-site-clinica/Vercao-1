@@ -7,6 +7,7 @@ import clinica.Repository.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public PacienteDTO findPacienteById(Long id) {
         Paciente paciente = pacienteRepository.findById(id)
@@ -28,11 +31,14 @@ public class PacienteService {
 
     public MensagemDTO cadastrarPaciente(PacienteDTO pacienteDTO) {
         Paciente paciente = toPaciente(pacienteDTO);
+        paciente.setPassword(passwordEncoder.encode(paciente.getPassword()));
         pacienteRepository.save(paciente);
         return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarPaciente(Long id, PacienteDTO pacienteDTO) {
         Paciente paciente = toPaciente(pacienteDTO);
+        String senha= pacienteRepository.findSenhaById(paciente.getId());
+        paciente.setPassword(senha);
         pacienteRepository.save(paciente);
         return new MensagemDTO("Paciente atualizado com sucesso!", HttpStatus.CREATED);
     }

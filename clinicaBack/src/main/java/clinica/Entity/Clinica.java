@@ -8,9 +8,9 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name="clinica",schema = "public")
+@PrimaryKeyJoinColumn(name = "id_clinica")
 @Getter @Setter
-public class Clinica extends Abstract {
+public class Clinica extends Usuario {
 
     @Column(name = "cnpj",unique = true,nullable = false)
     private String cnpj;
