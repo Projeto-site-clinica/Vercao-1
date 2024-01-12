@@ -1,5 +1,5 @@
-import { Usuario } from "./usuario";
 import { Clinica } from "./clinica";
+import { Usuario } from "./usuario";
 
 export class Secretaria extends Usuario{
     rg!: string;

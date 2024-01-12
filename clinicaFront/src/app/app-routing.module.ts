@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './components/layout/index/index.component';
+import { LoginComponent } from './componentes/sistema/login/login.component';
+import { CadastrarComponent } from './componentes/sistema/cadastrar/cadastrar.component';
+import { IndexComponent } from './componentes/layout/index/index.component';
 import { rotaguardGuard } from './guards/rotaguard.guard';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { LoginComponent } from './components/sistema/login/login.component';
-import { CadastrarComponent } from './components/sistema/cadastrar/cadastrar.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: 'full'},

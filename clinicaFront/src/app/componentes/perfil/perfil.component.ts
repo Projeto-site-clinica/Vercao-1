@@ -1,20 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { Login } from '../../models/login';
-import { LoginService } from '../../service/login.service';
-import { PacienteService } from '../../service/paciente.service';
 import { ToastrService } from 'ngx-toastr';
-import { Paciente } from '../../models/paciente';
-import { DoutorService } from '../../service/doutor.service';
-import { ClinicaService } from '../../service/clinica.service';
-import { SecretariaService } from '../../service/secretaria.service';
-import { Doutor } from '../../models/doutor';
-import { Clinica } from '../../models/clinica';
-import { Secretaria } from '../../models/secretaria';
+import { Clinica } from 'src/app/models/clinica';
+import { Doutor } from 'src/app/models/doutor';
+import { Paciente } from 'src/app/models/paciente';
+import { Secretaria } from 'src/app/models/secretaria';
+import { ClinicaService } from 'src/app/service/clinica.service';
+import { DoutorService } from 'src/app/service/doutor.service';
+import { LoginService } from 'src/app/service/login.service';
+import { PacienteService } from 'src/app/service/paciente.service';
+import { SecretariaService } from 'src/app/service/secretaria.service';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.scss'
+  styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent {
   loginService = inject(LoginService);
@@ -92,4 +91,5 @@ export class PerfilComponent {
       }
     })
   }
+
 }
