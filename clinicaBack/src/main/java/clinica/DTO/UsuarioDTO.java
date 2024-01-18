@@ -12,6 +12,8 @@ public class UsuarioDTO {
     private Boolean ativo = true;
 
     //dados pessoal
+    private String nome;
+
     private String username;
 
     private String celular;
@@ -25,7 +27,7 @@ public class UsuarioDTO {
     private String role;
 
     //endereco
-    private int cep;
+    private String cep;
 
     private String estado;
 

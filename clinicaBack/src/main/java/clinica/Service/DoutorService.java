@@ -33,6 +33,7 @@ public class DoutorService {
 
     public MensagemDTO cadastrarDoutor(DoutorDTO doutorDTO) {
         Doutor doutor = toDoutor(doutorDTO);
+        doutor.setRole("DOUTOR");
         doutor.setPassword(passwordEncoder.encode(doutor.getPassword()));
         doutorRepository.save(doutor);
         return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
@@ -61,6 +62,7 @@ public class DoutorService {
 
         doutorDTO.setId(doutor.getId());
         doutorDTO.setAtivo(doutor.getAtivo());
+        doutorDTO.setNome(doutor.getNome());
         doutorDTO.setUsername(doutor.getUsername());
         doutorDTO.setCelular(doutor.getCelular());
         doutorDTO.setEmail(doutor.getEmail());

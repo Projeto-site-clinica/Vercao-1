@@ -23,6 +23,9 @@ public class Usuario implements UserDetails {
     private Boolean ativo = true;
 
     //dados pessoal
+    @Column(name = "nome",nullable = false)
+    private String nome;
+
     @Column(name = "username",unique = true,nullable = false)
     private String username;
 
@@ -40,7 +43,7 @@ public class Usuario implements UserDetails {
 
     //endereco
     @Column(name = "cep",nullable = false)
-    private int cep;
+    private String cep;
 
     @Column(name = "estado",nullable = false)
     private String estado;

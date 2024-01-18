@@ -31,6 +31,7 @@ public class SecretariaService {
 
     public MensagemDTO cadastrarSecretaria(SecretariaDTO secretariaDTO) {
         Secretaria secretaria = toSecretaria(secretariaDTO);
+        secretaria.setRole("SECRETARIA");
         secretaria.setPassword(passwordEncoder.encode(secretaria.getPassword()));
         secretariaRepository.save(secretaria);
         return new MensagemDTO("Secretaria cadastrada com sucesso!", HttpStatus.CREATED);
@@ -59,6 +60,7 @@ public class SecretariaService {
 
         secretariaDTO.setId(secretaria.getId());
         secretariaDTO.setAtivo(secretaria.getAtivo());
+        secretariaDTO.setNome(secretaria.getNome());
         secretariaDTO.setUsername(secretaria.getUsername());
         secretariaDTO.setCelular(secretaria.getCelular());
         secretariaDTO.setEmail(secretaria.getEmail());
@@ -85,6 +87,7 @@ public class SecretariaService {
 
         novoSecretaria.setId(secretariaDTO.getId());
         novoSecretaria.setAtivo(secretariaDTO.getAtivo());
+        novoSecretaria.setNome(secretariaDTO.getNome());
         novoSecretaria.setUsername(secretariaDTO.getUsername());
         novoSecretaria.setCelular(secretariaDTO.getCelular());
         novoSecretaria.setEmail(secretariaDTO.getEmail());

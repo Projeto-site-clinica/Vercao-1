@@ -26,7 +26,7 @@ export class LoginComponent {
         this.roteador.navigate(['perfil']);
       },
       error: erro => {
-        this.toastr.error(erro.error.mensagem);
+        !this.toastr.error(erro.error.mensagem);
       }
     });
   }

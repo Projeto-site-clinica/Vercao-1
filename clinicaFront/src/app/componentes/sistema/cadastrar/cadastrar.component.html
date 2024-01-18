@@ -1,1 +1,662 @@
-<p>cadastrar works!</p>
+<div class="inicial d-flex flex-column justify-content-center m-0 align-items-center h-100">
+    <label for="usuario">Vc é?</label>
+    <select name="usuario" [(ngModel)]="tipoUsuario" id="usuario">
+        <option [ngValue]="undefined">Selecione...</option>
+        <option [ngValue]="'paciente'">Eu sou paciente</option>
+        <option [ngValue]="'doutor'">Eu sou doutor</option>
+        <option [ngValue]="'clinica'">Eu sou clinica</option>
+        <option [ngValue]="'secretaria'">Eu sou secretaria</option>
+    </select>
+    <article class="h-75 w-75">
+        <div *ngIf="tipoUsuario === 'paciente'" class="scroll">
+            <form #formPaciente="ngForm" (ngSubmit)="salvarPaciente(formPaciente)">
+                <div class="mb-3">
+                    <label for="nome" class="form-label" [class.error-color]="!nome.valid && nome.touched">Nome:</label>
+                    <input #nome="ngModel" required type="text" class="form-control"
+                        [class.error]="!nome.valid && nome.touched" name="nome" id="nome" [(ngModel)]="paciente.nome">
+                    <div *ngIf="!nome.valid && nome.touched" class="error-color alert">*Nome é obrigatório!</div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-md-4">
+                        <label for="rg" class="form-label" [class.error-color]="!rg.valid && rg.touched">RG:</label>
+                        <input #rg="ngModel" required type="text" class="form-control"
+                            [class.error]="!rg.valid && rg.touched" name="rg" id="rg" [(ngModel)]="paciente.rg">
+                        <div *ngIf="!rg.valid && rg.touched" class="error-color alert">*RG é obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="cpf" class="form-label" [class.error-color]="!cpf.valid && cpf.touched">CPF:</label>
+                        <input #cpf="ngModel" required type="text" class="form-control"
+                            [class.error]="!cpf.valid && cpf.touched" name="cpf" id="cpf" [(ngModel)]="paciente.cpf">
+                        <div *ngIf="!cpf.valid && cpf.touched" class="error-color alert">*CPF é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="data" class="form-label" [class.error-color]="!data.valid && data.touched">Data de
+                            nacimento:</label>
+                        <input #data="ngModel" required type="text" class="form-control"
+                            [class.error]="!data.valid && data.touched" name="data" id="data"
+                            [(ngModel)]="paciente.dataNacimento">
+                        <div *ngIf="!data.valid && data.touched" class="error-color alert">*Data é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="cel" class="form-label"
+                            [class.error-color]="!cel.valid && cel.touched">Celular:</label>
+                        <input #cel="ngModel" required type="text" class="form-control"
+                            [class.error]="!cel.valid && cel.touched" name="cel" id="cel"
+                            [(ngModel)]="paciente.celular">
+                        <div *ngIf="!cel.valid && cel.touched" class="error-color alert">*Celular é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="email" class="form-label"
+                            [class.error-color]="!email.valid && email.touched">E-mail:</label>
+                        <input #email="ngModel" required type="text" class="form-control"
+                            [class.error]="!email.valid && email.touched" name="email" id="email"
+                            [(ngModel)]="paciente.email">
+                        <div *ngIf="!email.valid && email.touched" class="error-color alert">*E-mail é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-3">
+                        <label for="cep" class="form-label" [class.error-color]="!cep.valid && cep.touched">Cep:</label>
+                        <input #cep="ngModel" required type="text" class="form-control"
+                            [class.error]="!cep.valid && cep.touched" name="cep" id="cep" [(ngModel)]="paciente.cep"
+                            (blur)="consultaCep($event, formPaciente)">
+                        <div *ngIf="!cep.valid && cep.touched" class="error-color alert">*Cep é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="rua" class="form-label" [class.error-color]="!rua.valid && rua.touched">Rua:</label>
+                        <input #rua="ngModel" required type="text" class="form-control"
+                            [class.error]="!rua.valid && rua.touched" name="rua" id="rua" [(ngModel)]="paciente.rua"
+                            disabled>
+                        <div *ngIf="!rua.valid && rua.touched" class="error-color alert">*Rua é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-3">
+                        <label for="num" class="form-label"
+                            [class.error-color]="!num.valid && num.touched">Numéro:</label>
+                        <input #num="ngModel" required type="text" class="form-control"
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="paciente.number">
+                        <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-4">
+                        <label for="bairro" class="form-label"
+                            [class.error-color]="!bairro.valid && bairro.touched">Bairro:</label>
+                        <input #bairro="ngModel" required type="text" class="form-control"
+                            [class.error]="!bairro.valid && bairro.touched" name="bairro" id="bairro"
+                            [(ngModel)]="paciente.bairro" disabled>
+                        <div *ngIf="!bairro.valid && bairro.touched" class="error-color alert">*Bairro é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="cidade" class="form-label"
+                            [class.error-color]="!cidade.valid && cidade.touched">Cidade:</label>
+                        <input #cidade="ngModel" required type="text" class="form-control"
+                            [class.error]="!cidade.valid && cidade.touched" name="cidade" id="cidade"
+                            [(ngModel)]="paciente.cidade" disabled>
+                        <div *ngIf="!cidade.valid && cidade.touched" class="error-color alert">*Cidade é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="estado" class="form-label"
+                            [class.error-color]="!estado.valid && estado.touched">Estado:</label>
+                        <input #estado="ngModel" required type="text" class="form-control"
+                            [class.error]="!estado.valid && estado.touched" name="estado" id="estado"
+                            [(ngModel)]="paciente.estado" disabled>
+                        <div *ngIf="!estado.valid && estado.touched" class="error-color alert">*Estado é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="comp" class="form-label">Complemento:</label>
+                        <input type="text" class="form-control" name="comp" id="comp"
+                            [(ngModel)]="paciente.complemento">
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="referencia" class="form-label">Referencia:</label>
+                        <input type="text" class="form-control" name="referencia" id="referencia"
+                            [(ngModel)]="paciente.referencia">
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="username" class="form-label"
+                            [class.error-color]="!username.valid && username.touched">Username:</label>
+                        <input #username="ngModel" required type="text" class="form-control"
+                            [class.error]="!username.valid && username.touched" name="username" id="username"
+                            [(ngModel)]="paciente.username">
+                        <div *ngIf="!username.valid && username.touched" class="error-color alert">*Username é
+                            obrigatório!</div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="password" class="form-label"
+                            [class.error-color]="!password.valid && password.touched">Password:</label>
+                        <input #password="ngModel" required type="password" class="form-control"
+                            [class.error]="!password.valid && password.touched" name="password" id="password"
+                            [(ngModel)]="paciente.password">
+                        <div *ngIf="!password.valid && password.touched" class="error-color alert">*Password é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <button type="submit" class="salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="tipoUsuario === 'doutor'">
+            <form #formDoutor="ngForm" (ngSubmit)="salvarDoutor(formDoutor)">
+                <div class="mb-3">
+                    <label for="nome" class="form-label" [class.error-color]="!nome.valid && nome.touched">Nome:</label>
+                    <input #nome="ngModel" required type="text" class="form-control"
+                        [class.error]="!nome.valid && nome.touched" name="nome" id="nome" [(ngModel)]="doutor.nome">
+                    <div *ngIf="!nome.valid && nome.touched" class="error-color alert">*Nome é obrigatório!</div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-md-4">
+                        <label for="rg" class="form-label" [class.error-color]="!rg.valid && rg.touched">RG:</label>
+                        <input #rg="ngModel" required type="text" class="form-control"
+                            [class.error]="!rg.valid && rg.touched" name="rg" id="rg" [(ngModel)]="doutor.rg">
+                        <div *ngIf="!rg.valid && rg.touched" class="error-color alert">*RG é obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="cpf" class="form-label" [class.error-color]="!cpf.valid && cpf.touched">CPF:</label>
+                        <input #cpf="ngModel" required type="text" class="form-control"
+                            [class.error]="!cpf.valid && cpf.touched" name="cpf" id="cpf" [(ngModel)]="doutor.cpf">
+                        <div *ngIf="!cpf.valid && cpf.touched" class="error-color alert">*CPF é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="data" class="form-label" [class.error-color]="!data.valid && data.touched">Data de
+                            nacimento:</label>
+                        <input #data="ngModel" required type="text" class="form-control"
+                            [class.error]="!data.valid && data.touched" name="data" id="data"
+                            [(ngModel)]="doutor.dataNacimento">
+                        <div *ngIf="!data.valid && data.touched" class="error-color alert">*Data é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="cel" class="form-label"
+                            [class.error-color]="!cel.valid && cel.touched">Celular:</label>
+                        <input #cel="ngModel" required type="text" class="form-control"
+                            [class.error]="!cel.valid && cel.touched" name="cel" id="cel" [(ngModel)]="doutor.celular">
+                        <div *ngIf="!cel.valid && cel.touched" class="error-color alert">*Celular é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="email" class="form-label"
+                            [class.error-color]="!email.valid && email.touched">E-mail:</label>
+                        <input #email="ngModel" required type="text" class="form-control"
+                            [class.error]="!email.valid && email.touched" name="email" id="email"
+                            [(ngModel)]="doutor.email">
+                        <div *ngIf="!email.valid && email.touched" class="error-color alert">*E-mail é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-3">
+                        <label for="cep" class="form-label" [class.error-color]="!cep.valid && cep.touched">Cep:</label>
+                        <input #cep="ngModel" required type="text" class="form-control"
+                            [class.error]="!cep.valid && cep.touched" name="cep" id="cep" [(ngModel)]="doutor.cep"
+                            (blur)="consultaCep($event, formDoutor)">
+                        <div *ngIf="!cep.valid && cep.touched" class="error-color alert">*Cep é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="rua" class="form-label" [class.error-color]="!rua.valid && rua.touched">Rua:</label>
+                        <input #rua="ngModel" required type="text" class="form-control"
+                            [class.error]="!rua.valid && rua.touched" name="rua" id="rua" [(ngModel)]="doutor.rua"
+                            disabled>
+                        <div *ngIf="!rua.valid && rua.touched" class="error-color alert">*Rua é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-3">
+                        <label for="num" class="form-label"
+                            [class.error-color]="!num.valid && num.touched">Numéro:</label>
+                        <input #num="ngModel" required type="text" class="form-control"
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="doutor.number">
+                        <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-4">
+                        <label for="bairro" class="form-label"
+                            [class.error-color]="!bairro.valid && bairro.touched">Bairro:</label>
+                        <input #bairro="ngModel" required type="text" class="form-control"
+                            [class.error]="!bairro.valid && bairro.touched" name="bairro" id="bairro"
+                            [(ngModel)]="doutor.bairro" disabled>
+                        <div *ngIf="!bairro.valid && bairro.touched" class="error-color alert">*Bairro é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="cidade" class="form-label"
+                            [class.error-color]="!cidade.valid && cidade.touched">Cidade:</label>
+                        <input #cidade="ngModel" required type="text" class="form-control"
+                            [class.error]="!cidade.valid && cidade.touched" name="cidade" id="cidade"
+                            [(ngModel)]="doutor.cidade" disabled>
+                        <div *ngIf="!cidade.valid && cidade.touched" class="error-color alert">*Cidade é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="estado" class="form-label"
+                            [class.error-color]="!estado.valid && estado.touched">Estado:</label>
+                        <input #estado="ngModel" required type="text" class="form-control"
+                            [class.error]="!estado.valid && estado.touched" name="estado" id="estado"
+                            [(ngModel)]="doutor.estado" disabled>
+                        <div *ngIf="!estado.valid && estado.touched" class="error-color alert">*Estado é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="comp" class="form-label">Complemento:</label>
+                        <input type="text" class="form-control" name="comp" id="comp" [(ngModel)]="doutor.complemento">
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="referencia" class="form-label">Referencia:</label>
+                        <input type="text" class="form-control" name="referencia" id="referencia"
+                            [(ngModel)]="doutor.referencia">
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="descricao" class="form-label">Descriçao:</label>
+                        <textarea #descricao="ngModel" type="text" class="form-control" name="descricao" id="descricao"
+                            [(ngModel)]="doutor.descricao"></textarea>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="formacao" class="form-label"
+                            [class.error-color]="!formacao.valid && formacao.touched">Formaçao:</label>
+                        <input #formacao="ngModel" required type="formacao" class="form-control"
+                            [class.error]="!formacao.valid && formacao.touched" name="formacao" id="formacao"
+                            [(ngModel)]="doutor.formacao">
+                        <div *ngIf="!formacao.valid && formacao.touched" class="error-color alert">*Formaçao é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="username" class="form-label"
+                            [class.error-color]="!username.valid && username.touched">Username:</label>
+                        <input #username="ngModel" required type="text" class="form-control"
+                            [class.error]="!username.valid && username.touched" name="username" id="username"
+                            [(ngModel)]="doutor.username">
+                        <div *ngIf="!username.valid && username.touched" class="error-color alert">*Username é
+                            obrigatório!</div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="password" class="form-label"
+                            [class.error-color]="!password.valid && password.touched">Password:</label>
+                        <input #password="ngModel" required type="password" class="form-control"
+                            [class.error]="!password.valid && password.touched" name="password" id="password"
+                            [(ngModel)]="doutor.password">
+                        <div *ngIf="!password.valid && password.touched" class="error-color alert">*Password é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <button type="submit" class="salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="tipoUsuario === 'clinica'">
+            <form #formClinica="ngForm" (ngSubmit)="salvarClinica(formClinica)">
+                <div class="mb-3">
+                    <label for="nome" class="form-label" [class.error-color]="!nome.valid && nome.touched">Nome:</label>
+                    <input #nome="ngModel" required type="text" class="form-control"
+                        [class.error]="!nome.valid && nome.touched" name="nome" id="nome" [(ngModel)]="clinica.nome">
+                    <div *ngIf="!nome.valid && nome.touched" class="error-color alert">*Nome é obrigatório!</div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-md-4">
+                        <label for="cnpj" class="form-label"
+                            [class.error-color]="!cnpj.valid && cnpj.touched">CNPJ:</label>
+                        <input #cnpj="ngModel" required type="text" class="form-control"
+                            [class.error]="!cnpj.valid && cnpj.touched" name="cnpj" id="cnpj"
+                            [(ngModel)]="clinica.cnpj">
+                        <div *ngIf="!cnpj.valid && cnpj.touched" class="error-color alert">*CPF é
+                            obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="cel" class="form-label"
+                            [class.error-color]="!cel.valid && cel.touched">Celular:</label>
+                        <input #cel="ngModel" required type="text" class="form-control"
+                            [class.error]="!cel.valid && cel.touched" name="cel" id="cel" [(ngModel)]="clinica.celular">
+                        <div *ngIf="!cel.valid && cel.touched" class="error-color alert">*Celular é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-lg-4">
+                        <label for="email" class="form-label"
+                            [class.error-color]="!email.valid && email.touched">E-mail:</label>
+                        <input #email="ngModel" required type="text" class="form-control"
+                            [class.error]="!email.valid && email.touched" name="email" id="email"
+                            [(ngModel)]="clinica.email">
+                        <div *ngIf="!email.valid && email.touched" class="error-color alert">*E-mail é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-3">
+                        <label for="cep" class="form-label" [class.error-color]="!cep.valid && cep.touched">Cep:</label>
+                        <input #cep="ngModel" required type="text" class="form-control"
+                            [class.error]="!cep.valid && cep.touched" name="cep" id="cep" [(ngModel)]="clinica.cep"
+                            (blur)="consultaCep($event, formClinica)">
+                        <div *ngIf="!cep.valid && cep.touched" class="error-color alert">*Cep é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="rua" class="form-label" [class.error-color]="!rua.valid && rua.touched">Rua:</label>
+                        <input #rua="ngModel" required type="text" class="form-control"
+                            [class.error]="!rua.valid && rua.touched" name="rua" id="rua" [(ngModel)]="clinica.rua"
+                            disabled>
+                        <div *ngIf="!rua.valid && rua.touched" class="error-color alert">*Rua é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-3">
+                        <label for="num" class="form-label"
+                            [class.error-color]="!num.valid && num.touched">Numéro:</label>
+                        <input #num="ngModel" required type="text" class="form-control"
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="clinica.number">
+                        <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-4">
+                        <label for="bairro" class="form-label"
+                            [class.error-color]="!bairro.valid && bairro.touched">Bairro:</label>
+                        <input #bairro="ngModel" required type="text" class="form-control"
+                            [class.error]="!bairro.valid && bairro.touched" name="bairro" id="bairro"
+                            [(ngModel)]="clinica.bairro" disabled>
+                        <div *ngIf="!bairro.valid && bairro.touched" class="error-color alert">*Bairro é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="cidade" class="form-label"
+                            [class.error-color]="!cidade.valid && cidade.touched">Cidade:</label>
+                        <input #cidade="ngModel" required type="text" class="form-control"
+                            [class.error]="!cidade.valid && cidade.touched" name="cidade" id="cidade"
+                            [(ngModel)]="clinica.cidade" disabled>
+                        <div *ngIf="!cidade.valid && cidade.touched" class="error-color alert">*Cidade é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="estado" class="form-label"
+                            [class.error-color]="!estado.valid && estado.touched">Estado:</label>
+                        <input #estado="ngModel" required type="text" class="form-control"
+                            [class.error]="!estado.valid && estado.touched" name="estado" id="estado"
+                            [(ngModel)]="clinica.estado" disabled>
+                        <div *ngIf="!estado.valid && estado.touched" class="error-color alert">*Estado é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="comp" class="form-label">Complemento:</label>
+                        <input type="text" class="form-control" name="comp" id="comp" [(ngModel)]="clinica.complemento">
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="referencia" class="form-label">Referencia:</label>
+                        <input type="text" class="form-control" name="referencia" id="referencia"
+                            [(ngModel)]="clinica.referencia">
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-12">
+                        <label for="descricao" class="form-label">Descriçao:</label>
+                        <textarea #descricao="ngModel" type="text" class="form-control" name="descricao" id="descricao"
+                            [(ngModel)]="clinica.descricao"></textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="username" class="form-label"
+                            [class.error-color]="!username.valid && username.touched">Username:</label>
+                        <input #username="ngModel" required type="text" class="form-control"
+                            [class.error]="!username.valid && username.touched" name="username" id="username"
+                            [(ngModel)]="clinica.username">
+                        <div *ngIf="!username.valid && username.touched" class="error-color alert">*Username é
+                            obrigatório!</div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="password" class="form-label"
+                            [class.error-color]="!password.valid && password.touched">Password:</label>
+                        <input #password="ngModel" required type="password" class="form-control"
+                            [class.error]="!password.valid && password.touched" name="password" id="password"
+                            [(ngModel)]="clinica.password">
+                        <div *ngIf="!password.valid && password.touched" class="error-color alert">*Password é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <button type="submit" class="salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="tipoUsuario === 'secretaria'">
+            <form #formSecretaria="ngForm" (ngSubmit)="salvarSecretaria(formSecretaria)">
+                <div class="mb-3">
+                    <label for="nome" class="form-label" [class.error-color]="!nome.valid && nome.touched">Nome:</label>
+                    <input #nome="ngModel" required type="text" class="form-control"
+                        [class.error]="!nome.valid && nome.touched" name="nome" id="nome" [(ngModel)]="secretaria.nome">
+                    <div *ngIf="!nome.valid && nome.touched" class="error-color alert">*Nome é obrigatório!</div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-md-4">
+                        <label for="rg" class="form-label" [class.error-color]="!rg.valid && rg.touched">RG:</label>
+                        <input #rg="ngModel" required type="text" class="form-control"
+                            [class.error]="!rg.valid && rg.touched" name="rg" id="rg" [(ngModel)]="secretaria.rg">
+                        <div *ngIf="!rg.valid && rg.touched" class="error-color alert">*RG é obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="cpf" class="form-label" [class.error-color]="!cpf.valid && cpf.touched">CPF:</label>
+                        <input #cpf="ngModel" required type="text" class="form-control"
+                            [class.error]="!cpf.valid && cpf.touched" name="cpf" id="cpf" [(ngModel)]="secretaria.cpf">
+                        <div *ngIf="!cpf.valid && cpf.touched" class="error-color alert">*CPF é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="data" class="form-label" [class.error-color]="!data.valid && data.touched">Data de
+                            nacimento:</label>
+                        <input #data="ngModel" required type="text" class="form-control"
+                            [class.error]="!data.valid && data.touched" name="data" id="data"
+                            [(ngModel)]="secretaria.dataNacimento">
+                        <div *ngIf="!data.valid && data.touched" class="error-color alert">*Data é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="cel" class="form-label"
+                            [class.error-color]="!cel.valid && cel.touched">Celular:</label>
+                        <input #cel="ngModel" required type="text" class="form-control"
+                            [class.error]="!cel.valid && cel.touched" name="cel" id="cel"
+                            [(ngModel)]="secretaria.celular">
+                        <div *ngIf="!cel.valid && cel.touched" class="error-color alert">*Celular é
+                            obrigatório!
+                        </div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="email" class="form-label"
+                            [class.error-color]="!email.valid && email.touched">E-mail:</label>
+                        <input #email="ngModel" required type="text" class="form-control"
+                            [class.error]="!email.valid && email.touched" name="email" id="email"
+                            [(ngModel)]="secretaria.email">
+                        <div *ngIf="!email.valid && email.touched" class="error-color alert">*E-mail é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-3">
+                        <label for="cep" class="form-label" [class.error-color]="!cep.valid && cep.touched">Cep:</label>
+                        <input #cep="ngModel" required type="text" class="form-control"
+                            [class.error]="!cep.valid && cep.touched" name="cep" id="cep" [(ngModel)]="secretaria.cep"
+                            (blur)="consultaCep($event, formSecretaria)">
+                        <div *ngIf="!cep.valid && cep.touched" class="error-color alert">*Cep é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label for="rua" class="form-label" [class.error-color]="!rua.valid && rua.touched">Rua:</label>
+                        <input #rua="ngModel" required type="text" class="form-control"
+                            [class.error]="!rua.valid && rua.touched" name="rua" id="rua" [(ngModel)]="secretaria.rua"
+                            disabled>
+                        <div *ngIf="!rua.valid && rua.touched" class="error-color alert">*Rua é obrigatório!
+                        </div>
+                    </div>
+                    <div class="mb-3 col-lg-3">
+                        <label for="num" class="form-label"
+                            [class.error-color]="!num.valid && num.touched">Numéro:</label>
+                        <input #num="ngModel" required type="text" class="form-control"
+                            [class.error]="!num.valid && num.touched" name="num" id="num"
+                            [(ngModel)]="secretaria.number">
+                        <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
+                            obrigatório!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-4">
+                        <label for="bairro" class="form-label"
+                            [class.error-color]="!bairro.valid && bairro.touched">Bairro:</label>
+                        <input #bairro="ngModel" required type="text" class="form-control"
+                            [class.error]="!bairro.valid && bairro.touched" name="bairro" id="bairro"
+                            [(ngModel)]="secretaria.bairro" disabled>
+                        <div *ngIf="!bairro.valid && bairro.touched" class="error-color alert">*Bairro é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="cidade" class="form-label"
+                            [class.error-color]="!cidade.valid && cidade.touched">Cidade:</label>
+                        <input #cidade="ngModel" required type="text" class="form-control"
+                            [class.error]="!cidade.valid && cidade.touched" name="cidade" id="cidade"
+                            [(ngModel)]="secretaria.cidade" disabled>
+                        <div *ngIf="!cidade.valid && cidade.touched" class="error-color alert">*Cidade é
+                            obrigatório!</div>
+                    </div>
+                    <div class="mb-3 col-lg-4">
+                        <label for="estado" class="form-label"
+                            [class.error-color]="!estado.valid && estado.touched">Estado:</label>
+                        <input #estado="ngModel" required type="text" class="form-control"
+                            [class.error]="!estado.valid && estado.touched" name="estado" id="estado"
+                            [(ngModel)]="secretaria.estado" disabled>
+                        <div *ngIf="!estado.valid && estado.touched" class="error-color alert">*Estado é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="comp" class="form-label">Complemento:</label>
+                        <input type="text" class="form-control" name="comp" id="comp"
+                            [(ngModel)]="secretaria.complemento">
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="referencia" class="form-label">Referencia:</label>
+                        <input type="text" class="form-control" name="referencia" id="referencia"
+                            [(ngModel)]="secretaria.referencia">
+                    </div>
+                </div>
+
+                <div class="d-flex text-center col-lg-12 w-100">
+                    <div class="mb-3 col-lg-6">
+                        <label for="username" class="form-label"
+                            [class.error-color]="!username.valid && username.touched">Username:</label>
+                        <input #username="ngModel" required type="text" class="form-control"
+                            [class.error]="!username.valid && username.touched" name="username" id="username"
+                            [(ngModel)]="secretaria.username">
+                        <div *ngIf="!username.valid && username.touched" class="error-color alert">*Username é
+                            obrigatório!</div>
+                    </div>
+
+                    <div class="mb-3 col-lg-6">
+                        <label for="password" class="form-label"
+                            [class.error-color]="!password.valid && password.touched">Password:</label>
+                        <input #password="ngModel" required type="password" class="form-control"
+                            [class.error]="!password.valid && password.touched" name="password" id="password"
+                            [(ngModel)]="secretaria.password">
+                        <div *ngIf="!password.valid && password.touched" class="error-color alert">*Password é
+                            obrigatório!</div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <button type="submit" class="salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </article>
+</div>

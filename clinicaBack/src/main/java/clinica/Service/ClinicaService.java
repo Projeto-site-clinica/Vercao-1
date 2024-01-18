@@ -31,6 +31,7 @@ public class ClinicaService {
 
     public MensagemDTO cadastrarClinica(ClinicaDTO clinicaDTO) {
         Clinica clinica = toClinica(clinicaDTO);
+        clinica.setRole("CLINICA");
         clinica.setPassword(passwordEncoder.encode(clinica.getPassword()));
         clinicaRepository.save(clinica);
         return new MensagemDTO("Clinica cadastrada com sucesso!", HttpStatus.CREATED);
@@ -59,6 +60,7 @@ public class ClinicaService {
 
         clinicaDTO.setId(clinica.getId());
         clinicaDTO.setAtivo(clinica.getAtivo());
+        clinicaDTO.setNome(clinica.getNome());
         clinicaDTO.setUsername(clinica.getUsername());
         clinicaDTO.setCelular(clinica.getCelular());
         clinicaDTO.setEmail(clinica.getEmail());
@@ -100,6 +102,7 @@ public class ClinicaService {
 
         secretariaDTO.setId(secretaria.getId());
         secretariaDTO.setAtivo(secretaria.getAtivo());
+        secretariaDTO.setNome(secretaria.getNome());
         secretariaDTO.setUsername(secretaria.getUsername());
         secretariaDTO.setCelular(secretaria.getCelular());
         secretariaDTO.setEmail(secretaria.getEmail());

@@ -31,6 +31,7 @@ public class PacienteService {
 
     public MensagemDTO cadastrarPaciente(PacienteDTO pacienteDTO) {
         Paciente paciente = toPaciente(pacienteDTO);
+        paciente.setRole("PACIENTE");
         paciente.setPassword(passwordEncoder.encode(paciente.getPassword()));
         pacienteRepository.save(paciente);
         return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
@@ -60,6 +61,7 @@ public class PacienteService {
         pacienteDTO.setId(paciente.getId());
         pacienteDTO.setAtivo(paciente.getAtivo());
         pacienteDTO.setUsername(paciente.getUsername());
+        pacienteDTO.setNome(paciente.getNome());
         pacienteDTO.setCelular(paciente.getCelular());
         pacienteDTO.setEmail(paciente.getEmail());
         pacienteDTO.setPassword(paciente.getPassword());
@@ -85,6 +87,7 @@ public class PacienteService {
 
         novoPaciente.setId(pacienteDTO.getId());
         novoPaciente.setAtivo(pacienteDTO.getAtivo());
+        novoPaciente.setNome(pacienteDTO.getNome());
         novoPaciente.setUsername(pacienteDTO.getUsername());
         novoPaciente.setCelular(pacienteDTO.getCelular());
         novoPaciente.setEmail(pacienteDTO.getEmail());

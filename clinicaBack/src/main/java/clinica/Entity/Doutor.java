@@ -26,7 +26,7 @@ public class Doutor extends Usuario {
     @Column(name = "avaliacao")
     private Double avaliacao;
 
-    @Column(name = "descricao",nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "solicitacao")
@@ -40,10 +40,10 @@ public class Doutor extends Usuario {
     @JoinColumn(name = "consulta")
     private List<Consulta> consulta;
 
-    @Column(name = "horario_start",nullable = false)
+    @Column(name = "horario_start")
     private LocalTime horarioStart;
 
-    @Column(name = "horario_end",nullable = false)
+    @Column(name = "horario_end")
     private LocalTime horarioEnd;
 
 //    @Column(name = "perfis")

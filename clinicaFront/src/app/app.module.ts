@@ -11,9 +11,11 @@ import { CadastrarComponent } from './componentes/sistema/cadastrar/cadastrar.co
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
 
 
 @NgModule({
@@ -31,11 +33,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders,
+    provideAnimations(),
+    provideToastr()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

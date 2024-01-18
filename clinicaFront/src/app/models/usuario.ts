@@ -1,5 +1,6 @@
 export class Usuario {
     id!: number;
+    nome!: string;
     username!: string;
     celular!: string;
     email!: string;
