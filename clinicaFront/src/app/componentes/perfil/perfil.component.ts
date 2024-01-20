@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Clinica } from 'src/app/models/clinica';
 import { Doutor } from 'src/app/models/doutor';
@@ -23,10 +23,15 @@ export class PerfilComponent {
   secretariaService = inject(SecretariaService);
   toastr = inject(ToastrService);
 
+  pacienteParaEditar: Paciente = new Paciente();
+  @Input() paciente1:Paciente = new Paciente();
+
   paciente: Paciente = new Paciente();
   doutor: Doutor = new Doutor();
   clinica: Clinica = new Clinica();
   secretaria: Secretaria = new Secretaria();
+
+  editar = false;
 
   constructor() {
     let aux = this.loginService.getUser().id;
@@ -90,6 +95,26 @@ export class PerfilComponent {
         this.toastr.error(erro.error.mensagem);
       }
     })
+  }
+
+  editarPaciente(paciente: Paciente) {
+    this.editar = true; 
+  }
+  dezativarModoEdicao() {
+    this.editar = false;
+  }
+
+  salvarPaciente() {
+    this.pacienteService.save(this.paciente1).subscribe({
+      next: mensagem => {
+        this.toastr.success(mensagem.mensagem);
+        console.log(mensagem);
+      },
+      error: erro => {
+        this.toastr.error(erro.error.mensagem);
+        console.error(erro);
+      }
+    });
   }
 
 }

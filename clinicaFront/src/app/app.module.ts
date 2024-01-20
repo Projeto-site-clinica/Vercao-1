@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
+import { HomeComponent } from './componentes/home/home.component';
+import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { httpInterceptorProviders } from './interceptors/httpinterceptor.service
     IndexComponent,
     LoginComponent,
     CadastrarComponent,
-    PerfilComponent
+    PerfilComponent,
+    HomeComponent,
+    AgendamentosComponent
   ],
   imports: [
     BrowserModule,
