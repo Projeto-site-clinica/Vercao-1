@@ -36,14 +36,14 @@ public class DoutorService {
         doutor.setRole("DOUTOR");
         doutor.setPassword(passwordEncoder.encode(doutor.getPassword()));
         doutorRepository.save(doutor);
-        return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Doutor cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarDoutor(Long id, DoutorDTO doutorDTO) {
         Doutor doutor = toDoutor(doutorDTO);
         String senha= doutorRepository.findSenhaById(doutor.getId());
         doutor.setPassword(senha);
         doutorRepository.save(doutor);
-        return new MensagemDTO("Paciente atualizado com sucesso!", HttpStatus.CREATED);
+        return new MensagemDTO("Doutor atualizado com sucesso!", HttpStatus.CREATED);
     }
 
     public MensagemDTO deletar(Long id) {
@@ -119,6 +119,7 @@ public class DoutorService {
 
         novoDoutor.setId(doutorDTO.getId());
         novoDoutor.setAtivo(doutorDTO.getAtivo());
+        novoDoutor.setNome(doutorDTO.getNome());
         novoDoutor.setUsername(doutorDTO.getUsername());
         novoDoutor.setCelular(doutorDTO.getCelular());
         novoDoutor.setEmail(doutorDTO.getEmail());

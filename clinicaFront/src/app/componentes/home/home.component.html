@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div>
+    <header>
+
+    </header>
+    <article>
+        <ul>
+            <button *ngFor="let doutor of listaDoutoresFiltrada" (click)="mostrarDetalhes(doutor)">
+                <span>{{ doutor.nome }} ,,, {{ doutor.formacao}}</span>
+            </button>
+        </ul>
+        <div>
+
+        </div>
+    </article>
+</div>

@@ -60,6 +60,7 @@ export class CadastrarComponent {
       this.doutorService.save(this.doutor).subscribe({
         next: mensagem => {
           this.toastr.success(mensagem.mensagem);
+          this.roteador.navigate(['login']);
         },
         error: erro => {
           this.toastr.error(erro.error.mensagem);
@@ -75,6 +76,7 @@ export class CadastrarComponent {
       this.clinicaService.save(this.clinica).subscribe({
         next: mensagem => {
           this.toastr.success(mensagem.mensagem);
+          this.roteador.navigate(['login']);
         },
         error: erro => {
           this.toastr.error(erro.error.mensagem);
@@ -90,6 +92,7 @@ export class CadastrarComponent {
       this.secretariaService.save(this.secretaria).subscribe({
         next: mensagem => {
           this.toastr.success(mensagem.mensagem);
+          this.roteador.navigate(['login']);
         },
         error: erro => {
           this.toastr.error(erro.error.mensagem);

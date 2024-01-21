@@ -18,7 +18,7 @@ public class Clinica extends Usuario {
     @Column(name = "avaliacao")
     private Double avaliacao;
 
-    @Column(name = "descricao",nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "solicitacao")

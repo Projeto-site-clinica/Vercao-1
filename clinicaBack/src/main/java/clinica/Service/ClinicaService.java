@@ -185,6 +185,7 @@ public class ClinicaService {
 
         novoClinica.setId(clinicaDTO.getId());
         novoClinica.setAtivo(clinicaDTO.getAtivo());
+        novoClinica.setNome(clinicaDTO.getNome());
         novoClinica.setUsername(clinicaDTO.getUsername());
         novoClinica.setCelular(clinicaDTO.getCelular());
         novoClinica.setEmail(clinicaDTO.getEmail());
