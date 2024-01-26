@@ -1,15 +1,29 @@
 <div>
     <header>
-
+        <div class="w-100">
+            <input class="w-100" type="text" placeholder="Pesquisar por nome" [(ngModel)]="termoPesquisa"
+                (keyup)="realizarPesquisa(termoPesquisa)" />
+        </div>
     </header>
     <article>
-        <ul>
-            <button *ngFor="let doutor of listaDoutoresFiltrada" (click)="mostrarDetalhes(doutor)">
+        <ul class="list-group w-100 mt-2">
+            <button class="list-group-item w-100 p-3" *ngFor="let doutor of listaDoutoresFiltrada; let i = index"
+                (click)="mostrarDetalhes(doutor, modalDoutorSelecionado, i)">
                 <span>{{ doutor.nome }} ,,, {{ doutor.formacao}}</span>
             </button>
         </ul>
-        <div>
-
-        </div>
     </article>
 </div>
+
+<ng-template #modalDoutorSelecionado let-modal>
+    <div class="modal-header cabecalhoModal">
+      <h4 class="modal-title"></h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <app-doutor-detalhes [doutor]="doutorSelecionado"></app-doutor-detalhes>
+    </div>
+    <div class="modal-footer footerModal">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+  </ng-template>

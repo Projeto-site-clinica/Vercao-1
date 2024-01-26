@@ -1,35 +1,473 @@
-<div>
-    <article>
-        <div *ngIf="loginService.getUser().role == 'PACIENTE'"
-            class="col-lg-12 w-100 h-100 container d-flex flex-column justify-content-center m-0 align-items-center">
-            <div class="col-lg-10 d-flex justify-content-between">
-                <div class="col-lg-5">
-                    <label for="">Data de nacimento:</label>
-                    <div class="d-flex align-items-center text-center justify-content-between" *ngIf="!editar">
-                        <p class="m-0 p-0">{{ paciente.dataNacimento }}</p>
-                        <button (click)="editarPaciente(paciente)"><img src="../../../assets/editar.svg"></button>
-                    </div>
-                    <form class="d-flex align-items-center text-center justify-content-between" *ngIf="editar">
-                        <input type="text" id="nome" [(ngModel)]="paciente1.dataNacimento">
-                        <button (click)="salvarPaciente()">Salvar</button>
-                        <button (click)="dezativarModoEdicao()">Cancelar</button>
-                    </form>
-                    <hr>
+<div class="scroll">
+    <div *ngIf="loginService.getUser().role == 'PACIENTE'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.nome }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
                 </div>
-                <!-- <div class="col-lg-5">
-                    <label for="">Nome:</label>
-                    <div class="d-flex align-items-center text-center justify-content-between">
-                        <p class="m-0 p-0">{{ paciente.nome }}</p>
-                        <button><img src="../../../assets/editar.svg"></button>
-                    </div>
-                    <hr>
-                </div> -->
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.cpf }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
             </div>
         </div>
-    </article>
-</div>
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">RG:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.rg }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.email }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.celular }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.cep }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.rua }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.number }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.bairro }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.cidade }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.estado }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <!-- <div class="col-lg-5" *ngIf="!editar">
+                <label for="">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between" >
+                    <p class="m-0 p-0">{{ paciente.nome }}</p>
+                    <button (click)="editarPaciente(paciente)"><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+             <div class="col-lg-5" *ngIf="editar">
+                <label for="">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <input  type="text" id="nome" [(ngModel)]="paciente.nome">
+                    <button (click)="salvarPaciente()">Salvar</button>
+                    <button (click)="dezativarModoEdicao()">Cancelar</button>
+                </div>
+                <hr>
+            </div>
 
 
-<div *ngIf="loginService.getUser().role == 'DOUTOR'">
-    <p>RG do Doutor: {{doutor.rg}}</p>
+
+            <div class="col-lg-5">
+                <label for="">Data de nacimento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between" *ngIf="!editar">
+                    <p class="m-0 p-0">{{ paciente.dataNacimento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+             <form class="d-flex align-items-center text-center justify-content-between" *ngIf="editar">
+                <input  type="text" id="nome" [(ngModel)]="paciente1.dataNacimento">
+                <button (click)="salvarPaciente()">Salvar</button>
+                <button (click)="dezativarModoEdicao()">Cancelar</button>
+            </form>-->
+    </div>
+
+    <div *ngIf="loginService.getUser().role == 'DOUTOR'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.nome }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cpf }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">RG:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.rg }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Formação:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.formacao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.email }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.celular }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cep }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.rua }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.number }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.bairro }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cidade }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.estado }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Perfil visualizado</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Descrição:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.descricao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Avaliação:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.avaliacao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="w-100 col-lg-12 mt-4">
+            <div class="d-flex justify-content-between">
+                <h4 class="form-label">Serviços</h4>
+                <button class="adicionar d-flex justify-content-end" (click)="adicionarConsulta(modalDoutor ,doutor)">Adicionar</button>
+            </div>
+            <hr>
+        </div>
+        <div class="w-100 col-lg-12">
+            <ul>
+                <li *ngFor="let consulta of doutor.consulta">
+                <p>{{ consulta.nomeConsulta }}</p>
+                <p>{{ consulta.valor }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <ng-template #modalDoutor let-modal>
+        <div class="modal-header cabecalhoModal">
+          <h4 class="modal-title">{{tituloModal}}</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          
+          <app-doutor-detalhes [doutor]="doutorParaEditar" (retorno)="atualizarLista($event)" ></app-doutor-detalhes>
+                  
+        </div>
+        <div class="modal-footer footerModal">
+          <button type="button" class="btn btn-danger " (click)="modal.close('Close click')">Close</button>
+        </div>
+      </ng-template>
+
+    <div *ngIf="loginService.getUser().role == 'CLINICA'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.nome }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cnpj }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.email }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.celular }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cep }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.rua }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.number }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.bairro }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4" *ngIf="!editar">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cidade }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3" *ngIf="!editar">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.estado }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5" *ngIf="!editar">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
 </div>

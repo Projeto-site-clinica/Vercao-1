@@ -40,8 +40,9 @@ public class DoutorService {
     }
     public MensagemDTO editarDoutor(Long id, DoutorDTO doutorDTO) {
         Doutor doutor = toDoutor(doutorDTO);
-        String senha= doutorRepository.findSenhaById(doutor.getId());
-        doutor.setPassword(senha);
+        /*String senha= doutorRepository.findSenhaById(doutor.getId());
+        doutor.setPassword(senha);*/
+        if (doutorDTO.getPassword() != null)
         doutorRepository.save(doutor);
         return new MensagemDTO("Doutor atualizado com sucesso!", HttpStatus.CREATED);
     }
@@ -88,8 +89,11 @@ public class DoutorService {
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
 
         ClinicaDTO clinicaDTO = new ClinicaDTO();
-        clinicaDTO.setId(doutor.getClinicaId().getId());
-        doutorDTO.setClinicaId(clinicaDTO);
+        if (doutor.getClinicaId() != null){
+            clinicaDTO.setId(doutor.getClinicaId().getId());
+            doutorDTO.setClinicaId(clinicaDTO);
+        }
+
 
         List<ConsultaDTO> listaCons = new ArrayList<>();
         if(doutor.getConsulta() != null)
@@ -123,7 +127,9 @@ public class DoutorService {
         novoDoutor.setUsername(doutorDTO.getUsername());
         novoDoutor.setCelular(doutorDTO.getCelular());
         novoDoutor.setEmail(doutorDTO.getEmail());
-        novoDoutor.setPassword(doutorDTO.getPassword());
+        if (doutorDTO.getPassword() != null) {
+            novoDoutor.setPassword(doutorDTO.getPassword());
+        }
         novoDoutor.setRole(doutorDTO.getRole());
         novoDoutor.setCep(doutorDTO.getCep());
         novoDoutor.setEstado(doutorDTO.getEstado());

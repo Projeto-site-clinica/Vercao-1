@@ -1,0 +1,27 @@
+.list-group{
+    max-height: 88%;
+    overflow-y: auto;
+    border-top:  3px solid #eead2d;
+    border-bottom:  3px solid #eead2d;
+    border-radius: 0px;
+    .list-group-item{
+        background-color: #8b4513;
+        border: none;
+        border-bottom: 3px solid #eead2d;
+        color: #fdfffc;
+        text-align: left; 
+        outline: none;
+    }
+    .list-group-item:hover{
+        background-color:  #64310d;
+        border-bottom: 3px solid #fdfffc;
+        color: #eead2d;
+        transition: .5s;
+    }
+    .list-group-item-active{
+        background-color:  #64310d;
+        border-bottom: 3px solid #fdfffc;
+        color: #eead2d;
+        transition: .5s;
+    }
+}

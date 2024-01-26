@@ -18,6 +18,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
 import { HomeComponent } from './componentes/home/home.component';
 import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.component';
+import { DoutorDetalhesComponent } from './componentes/perfil/doutor-detalhes/doutor-detalhes.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.c
     CadastrarComponent,
     PerfilComponent,
     HomeComponent,
-    AgendamentosComponent
+    AgendamentosComponent,
+    DoutorDetalhesComponent,
   ],
   imports: [
     BrowserModule,

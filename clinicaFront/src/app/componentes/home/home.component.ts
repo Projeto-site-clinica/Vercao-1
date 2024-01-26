@@ -1,4 +1,5 @@
-import { Component, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Doutor } from 'src/app/models/doutor';
 import { DoutorService } from 'src/app/service/doutor.service';
 
@@ -8,12 +9,17 @@ import { DoutorService } from 'src/app/service/doutor.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  @Output() retorno = new EventEmitter<any>();
 
   listaDoutoresFiltrada: Doutor[] = [];
   listaDoutorseOrginal: Doutor[] = [];
   doutorSelecionado: Doutor = new Doutor();
+  termoPesquisa!: "";
+  modalRef!: NgbModalRef;
+  indiceSelecionadoParaEdicao!: number;
 
   doutorService = inject(DoutorService);
+  modalService = inject(NgbModal);
   
   constructor(){
     this.listaDoutores();
@@ -28,9 +34,11 @@ export class HomeComponent {
     })
   }
 
-  mostrarDetalhes(doutor: Doutor) {
-    this.doutorSelecionado = doutor;
+  mostrarDetalhes(doutor: Doutor, modal: any, indice: number) {
+    this.doutorSelecionado = Object.assign({}, doutor);
+    this.indiceSelecionadoParaEdicao = indice;
 
+    this.modalRef = this.modalService.open(modal, { size: 'md' });
   }
 
   @Output() realizarPesquisa(termoPesquisa: string) {
@@ -40,8 +48,10 @@ export class HomeComponent {
     } else {
       this.listaDoutoresFiltrada = this.listaDoutorseOrginal.filter((doutor: Doutor) => {
         const nome = doutor.nome.toLowerCase();
+        const formacao = doutor.formacao.toLowerCase();
         return (
-          nome.includes(termoPesquisa)
+          nome.includes(termoPesquisa) ||
+          formacao.includes(termoPesquisa)
         );
       });
     }

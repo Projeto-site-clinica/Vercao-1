@@ -28,6 +28,9 @@ export class PacienteService {
       return this.http.post<Mensagem>(this.API, paciente);
     }
   }
+  editar(paciente: Paciente): Observable<Mensagem> {
+    return this.http.put<Mensagem>(this.API+"/"+`${paciente.id}`, paciente);
+  }
 
   deletar(id: number): Observable<Mensagem> {
     return this.http.delete<Mensagem>(this.API + "/" + `${id}`);

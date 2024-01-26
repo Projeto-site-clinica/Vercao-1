@@ -1,7 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Clinica } from 'src/app/models/clinica';
+import { Consulta } from 'src/app/models/consulta';
 import { Doutor } from 'src/app/models/doutor';
+import { Mensagem } from 'src/app/models/mensagem';
 import { Paciente } from 'src/app/models/paciente';
 import { Secretaria } from 'src/app/models/secretaria';
 import { ClinicaService } from 'src/app/service/clinica.service';
@@ -16,22 +19,26 @@ import { SecretariaService } from 'src/app/service/secretaria.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent {
+  @Output() retorno = new EventEmitter<any>();
+
   loginService = inject(LoginService);
   pacienteService = inject(PacienteService);
   doutorService = inject(DoutorService);
   clinicaService = inject(ClinicaService);
   secretariaService = inject(SecretariaService);
   toastr = inject(ToastrService);
+  modalService = inject(NgbModal);
 
-  pacienteParaEditar: Paciente = new Paciente();
-  @Input() paciente1:Paciente = new Paciente();
-
+  modalRef!: NgbModalRef;
   paciente: Paciente = new Paciente();
   doutor: Doutor = new Doutor();
   clinica: Clinica = new Clinica();
   secretaria: Secretaria = new Secretaria();
 
   editar = false;
+  indiceSelecionadoParaEdicao!: number;
+  tituloModal!: string;
+  doutorParaEditar: Doutor = new Doutor();
 
   constructor() {
     let aux = this.loginService.getUser().id;
@@ -97,15 +104,31 @@ export class PerfilComponent {
     })
   }
 
+  adicionarConsulta(modalDoutor: any,doutor: Doutor){
+    this.doutorParaEditar = Object.assign({}, doutor);
+    Object.assign(this.doutorParaEditar.consulta, doutor.consulta);
+    this.modalService.open(modalDoutor, { size: 'lg' ,scrollable: true});
+
+    this.tituloModal = "Adicionar Consulta";
+  }
+
+  atualizarLista(mensagem: Mensagem) {
+    this.modalService.dismissAll();
+    this.loginService.getUser().role == "DOUTOR"
+    this.retorno.emit("ok");
+  }
+
   editarPaciente(paciente: Paciente) {
     this.editar = true; 
+    this.paciente = Object.assign({}, paciente)
+    console.log(paciente);
   }
   dezativarModoEdicao() {
     this.editar = false;
   }
 
   salvarPaciente() {
-    this.pacienteService.save(this.paciente1).subscribe({
+    this.pacienteService.editar(this.paciente).subscribe({
       next: mensagem => {
         this.toastr.success(mensagem.mensagem);
         console.log(mensagem);

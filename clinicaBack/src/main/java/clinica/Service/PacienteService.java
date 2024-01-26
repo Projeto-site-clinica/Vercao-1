@@ -91,6 +91,7 @@ public class PacienteService {
         novoPaciente.setUsername(pacienteDTO.getUsername());
         novoPaciente.setCelular(pacienteDTO.getCelular());
         novoPaciente.setEmail(pacienteDTO.getEmail());
+        if (pacienteDTO.getPassword() != null)
         novoPaciente.setPassword(pacienteDTO.getPassword());
         novoPaciente.setRole(pacienteDTO.getRole());
         novoPaciente.setCep(pacienteDTO.getCep());

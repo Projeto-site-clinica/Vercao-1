@@ -32,6 +32,6 @@ public class Ticket {
     private Calendario data;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consulta",nullable = false)
+    @JoinColumn(name = "consulta_ticket",nullable = false)
     private Consulta consulta;
 }

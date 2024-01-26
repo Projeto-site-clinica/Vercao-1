@@ -37,7 +37,7 @@ public class Doutor extends Usuario {
     private Clinica clinicaId;
 
     @OneToMany
-    @JoinColumn(name = "consulta")
+    @JoinColumn(name = "consulta_id")
     private List<Consulta> consulta;
 
     @Column(name = "horario_start")

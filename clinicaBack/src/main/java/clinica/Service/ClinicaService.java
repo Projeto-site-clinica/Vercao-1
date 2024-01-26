@@ -154,8 +154,10 @@ public class ClinicaService {
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
 
         ClinicaDTO clinicaDTO = new ClinicaDTO();
-        clinicaDTO.setId(doutor.getClinicaId().getId());
-        doutorDTO.setClinicaId(clinicaDTO);
+        if (doutor.getClinicaId() != null){
+            clinicaDTO.setId(doutor.getClinicaId().getId());
+            doutorDTO.setClinicaId(clinicaDTO);
+        }
 
         List<ConsultaDTO> listaCons = new ArrayList<>();
         if(doutor.getConsulta() != null)
@@ -278,8 +280,11 @@ public class ClinicaService {
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
 
         Clinica clinica = new Clinica();
-        clinica.setId(doutorDTO.getClinicaId().getId());
-        novoDoutor.setClinicaId(clinica);
+        if (novoDoutor.getClinicaId() != null){
+            clinica.setId(doutorDTO.getClinicaId().getId());
+            novoDoutor.setClinicaId(clinica);
+        }
+
 
         List<Consulta> listaCons = new ArrayList<>();
         if(doutorDTO.getConsulta() != null)
