@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Clinica } from 'src/app/models/clinica';
@@ -8,6 +9,7 @@ import { Mensagem } from 'src/app/models/mensagem';
 import { Paciente } from 'src/app/models/paciente';
 import { Secretaria } from 'src/app/models/secretaria';
 import { ClinicaService } from 'src/app/service/clinica.service';
+import { ConsultaCepService } from 'src/app/service/consulta-cep.service';
 import { DoutorService } from 'src/app/service/doutor.service';
 import { LoginService } from 'src/app/service/login.service';
 import { PacienteService } from 'src/app/service/paciente.service';
@@ -27,6 +29,7 @@ export class PerfilComponent {
   clinicaService = inject(ClinicaService);
   secretariaService = inject(SecretariaService);
   toastr = inject(ToastrService);
+  cepService = inject(ConsultaCepService);
   modalService = inject(NgbModal);
 
   modalRef!: NgbModalRef;
@@ -35,12 +38,16 @@ export class PerfilComponent {
   clinica: Clinica = new Clinica();
   secretaria: Secretaria = new Secretaria();
 
+  modoEdicao: boolean[] = [];
   editar = false;
   indiceSelecionadoParaEdicao!: number;
   tituloModal!: string;
-  doutorParaEditar: Doutor = new Doutor();
+  consultaParaEditar: Consulta = new Consulta();
 
   constructor() {
+    for (let i = 0; i < 100; i++) {
+      this.modoEdicao.push(false);
+    }
     let aux = this.loginService.getUser().id;
     let id = 0;
     if (aux != null)
@@ -54,6 +61,8 @@ export class PerfilComponent {
       this.getClinica(id);
     else if (this.loginService.getUser().role == "SECRETARIA")
       this.getSecretaria(id);
+
+
   }
 
   getPaciente(id: number) {
@@ -104,12 +113,12 @@ export class PerfilComponent {
     })
   }
 
-  adicionarConsulta(modalDoutor: any,doutor: Doutor){
-    this.doutorParaEditar = Object.assign({}, doutor);
-    Object.assign(this.doutorParaEditar.consulta, doutor.consulta);
-    this.modalService.open(modalDoutor, { size: 'lg' ,scrollable: true});
+  adicionarConsulta(modalDoutor: any, doutor: Doutor) {
+    this.consultaParaEditar = new Consulta();
+    this.modalService.open(modalDoutor, { size: 'lg', scrollable: true });
 
     this.tituloModal = "Adicionar Consulta";
+    console.log(this.doutor);
   }
 
   atualizarLista(mensagem: Mensagem) {
@@ -118,19 +127,12 @@ export class PerfilComponent {
     this.retorno.emit("ok");
   }
 
-  editarPaciente(paciente: Paciente) {
-    this.editar = true; 
-    this.paciente = Object.assign({}, paciente)
-    console.log(paciente);
-  }
-  dezativarModoEdicao() {
-    this.editar = false;
-  }
-
-  salvarPaciente() {
+  salvarPaciente(posicao: number) {
+    console.log(this.paciente);
     this.pacienteService.editar(this.paciente).subscribe({
       next: mensagem => {
         this.toastr.success(mensagem.mensagem);
+        this.modoEdicao[posicao] = false;
         console.log(mensagem);
       },
       error: erro => {
@@ -139,5 +141,36 @@ export class PerfilComponent {
       }
     });
   }
+
+  // consultaCep(event: any, form: NgForm) {
+  //   const cep = event.target.value;
+  //   if (cep !== '') {
+  //     this.cepService.consultaCEP(cep).subscribe({
+  //       next: mensagem => {
+  //         this.populaDadosForm(mensagem, form);
+  //       },
+  //       error: erro => {
+  //         this.toastr.error('Ocorreu um erro ao consultar o CEP.');
+  //       }
+  //     });
+  //   }
+  // }
+
+  // populaDadosForm(dados: any, form: NgForm) {
+  //   if (dados && !dados.erro) {
+  //     form.form.patchValue({
+  //       rua: dados.logradouro,
+  //       cep: dados.cep,
+  //       complemento: dados.complemento,
+  //       bairro: dados.bairro,
+  //       cidade: dados.localidade,
+  //       estado: dados.uf
+  //     });
+  //     return true;
+  //   } else {
+  //     this.toastr.error('CEP inválido por favor preencha um valido!!');
+  //     return false;
+  //   }
+  // }
 
 }

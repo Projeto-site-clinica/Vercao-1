@@ -3,7 +3,8 @@ package clinica.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalTime;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -34,17 +35,16 @@ public class Doutor extends Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name = "clinica_id")
-    private Clinica clinicaId;
+    private Clinica clinica;
 
-    @OneToMany
-    @JoinColumn(name = "consulta_id")
+    @OneToMany(mappedBy = "doutor", cascade = CascadeType.ALL)
     private List<Consulta> consulta;
 
     @Column(name = "horario_start")
-    private LocalTime horarioStart;
+    private Timestamp horarioStart;
 
     @Column(name = "horario_end")
-    private LocalTime horarioEnd;
+    private Timestamp horarioEnd;
 
 //    @Column(name = "perfis")
 //    private List<Perfis> perfis;

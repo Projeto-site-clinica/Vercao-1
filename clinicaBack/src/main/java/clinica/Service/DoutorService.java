@@ -5,6 +5,7 @@ import clinica.Entity.Clinica;
 import clinica.Entity.Consulta;
 import clinica.Entity.Doutor;
 import clinica.Repository.DoutorRepository;
+import clinica.Repository.LoginRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ import java.util.List;
 public class DoutorService {
     @Autowired
     private DoutorRepository doutorRepository;
+    @Autowired
+    private LoginRepository loginRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -39,10 +42,10 @@ public class DoutorService {
         return new MensagemDTO("Doutor cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarDoutor(Long id, DoutorDTO doutorDTO) {
+        doutorDTO.setId(id);
         Doutor doutor = toDoutor(doutorDTO);
-        /*String senha= doutorRepository.findSenhaById(doutor.getId());
-        doutor.setPassword(senha);*/
-        if (doutorDTO.getPassword() != null)
+        String senha= loginRepository.findSenhaById(doutor.getId());
+        doutor.setPassword(senha);
         doutorRepository.save(doutor);
         return new MensagemDTO("Doutor atualizado com sucesso!", HttpStatus.CREATED);
     }
@@ -89,9 +92,9 @@ public class DoutorService {
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
 
         ClinicaDTO clinicaDTO = new ClinicaDTO();
-        if (doutor.getClinicaId() != null){
-            clinicaDTO.setId(doutor.getClinicaId().getId());
-            doutorDTO.setClinicaId(clinicaDTO);
+        if (doutor.getClinica() != null){
+            clinicaDTO.setId(doutor.getClinica().getId());
+            doutorDTO.setClinica(clinicaDTO);
         }
 
 
@@ -115,6 +118,12 @@ public class DoutorService {
         consultaDTO.setValor(consulta.getValor());
         consultaDTO.setTempo(consulta.getTempo());
 
+        DoutorDTO doutorDTO = new DoutorDTO();
+        if (consulta.getDoutor() != null){
+            consultaDTO.setId(consulta.getDoutor().getId());
+            consultaDTO.setDoutor(doutorDTO);
+        }
+
         return consultaDTO;
     }
 
@@ -127,9 +136,7 @@ public class DoutorService {
         novoDoutor.setUsername(doutorDTO.getUsername());
         novoDoutor.setCelular(doutorDTO.getCelular());
         novoDoutor.setEmail(doutorDTO.getEmail());
-        if (doutorDTO.getPassword() != null) {
-            novoDoutor.setPassword(doutorDTO.getPassword());
-        }
+        novoDoutor.setPassword(doutorDTO.getPassword());
         novoDoutor.setRole(doutorDTO.getRole());
         novoDoutor.setCep(doutorDTO.getCep());
         novoDoutor.setEstado(doutorDTO.getEstado());
@@ -150,10 +157,10 @@ public class DoutorService {
         novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
 
-        if (doutorDTO.getClinicaId() != null) {
+        if (doutorDTO.getClinica() != null) {
             Clinica clinica = new Clinica();
-            clinica.setId(doutorDTO.getClinicaId().getId());
-            novoDoutor.setClinicaId(clinica);
+            clinica.setId(doutorDTO.getClinica().getId());
+            novoDoutor.setClinica(clinica);
         }
 
         List<Consulta> listaCons = new ArrayList<>();
@@ -175,6 +182,12 @@ public class DoutorService {
         novaConsulta.setDescricao(consultaDTO.getDescricao());
         novaConsulta.setValor(consultaDTO.getValor());
         novaConsulta.setTempo(consultaDTO.getTempo());
+
+        Doutor doutor = new Doutor();
+        if (consultaDTO.getDoutor() != null){
+            novaConsulta.setId(consultaDTO.getDoutor().getId());
+            novaConsulta.setDoutor(doutor);
+        }
 
         return novaConsulta;
     }

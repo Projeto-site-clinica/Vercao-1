@@ -1,10 +1,11 @@
 package clinica.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Getter @Setter
@@ -26,7 +27,12 @@ public class Consulta {
     private String descricao;
 
     @Column(name = "tempo",nullable = false)
-    private LocalDateTime tempo;
+    private Timestamp tempo;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "doutor")
+    @JsonIgnoreProperties("consulta")
+    private Doutor doutor;
 
     //intervalo
 }

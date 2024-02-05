@@ -2,7 +2,7 @@ package clinica.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Getter @Setter
 public class TicketDTO {
@@ -14,7 +14,7 @@ public class TicketDTO {
 
     private DoutorDTO doutorId;
 
-    private LocalDateTime logMarcar;
+    private Timestamp logMarcar;
 
     private CalendarioDTO data;
 

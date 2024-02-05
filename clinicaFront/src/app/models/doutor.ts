@@ -10,7 +10,7 @@ export class Doutor extends Usuario{
     avaliacao!: number;
     descricao!: string;
     solicitacao: boolean = false;
-    clinicaId!: Clinica;
+    clinica!: Clinica;
     consulta!: Consulta[];
     horarioStart!: Date;
     horarioEnd!: Date;

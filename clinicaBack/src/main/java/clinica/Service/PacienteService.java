@@ -3,6 +3,7 @@ package clinica.Service;
 import clinica.DTO.PacienteDTO;
 import clinica.DTO.MensagemDTO;
 import clinica.Entity.Paciente;
+import clinica.Repository.LoginRepository;
 import clinica.Repository.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import java.util.List;
 public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
+    @Autowired
+    private LoginRepository loginRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -37,8 +40,9 @@ public class PacienteService {
         return new MensagemDTO("Paciente cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarPaciente(Long id, PacienteDTO pacienteDTO) {
+        pacienteDTO.setId(id);
         Paciente paciente = toPaciente(pacienteDTO);
-        String senha= pacienteRepository.findSenhaById(paciente.getId());
+        String senha= loginRepository.findSenhaById(paciente.getId());
         paciente.setPassword(senha);
         pacienteRepository.save(paciente);
         return new MensagemDTO("Paciente atualizado com sucesso!", HttpStatus.CREATED);
@@ -91,7 +95,6 @@ public class PacienteService {
         novoPaciente.setUsername(pacienteDTO.getUsername());
         novoPaciente.setCelular(pacienteDTO.getCelular());
         novoPaciente.setEmail(pacienteDTO.getEmail());
-        if (pacienteDTO.getPassword() != null)
         novoPaciente.setPassword(pacienteDTO.getPassword());
         novoPaciente.setRole(pacienteDTO.getRole());
         novoPaciente.setCep(pacienteDTO.getCep());

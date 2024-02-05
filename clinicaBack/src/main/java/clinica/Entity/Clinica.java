@@ -24,13 +24,13 @@ public class Clinica extends Usuario {
     @Column(name = "solicitacao")
     private Boolean solicitacao = false;
 
-    @OneToMany(mappedBy = "clinicaId",cascade = CascadeType.ALL)
-    @Column(name = "doutor_id")
-    @JsonIgnoreProperties("clinicaId")
+    @OneToMany(mappedBy = "clinica",cascade = CascadeType.ALL)
+    @Column(name = "doutores")
+    @JsonIgnoreProperties("clinica")
     private List<Doutor> doutores;
 
-    @OneToMany(mappedBy = "clinicaId",cascade = CascadeType.ALL)
-    @Column(name = "secretarias_id")
-    @JsonIgnoreProperties("clinicaId")
+    @OneToMany(mappedBy = "clinica",cascade = CascadeType.ALL)
+    @Column(name = "secretarias")
+    @JsonIgnoreProperties("clinica")
     private List<Secretaria> secretarias;
 }

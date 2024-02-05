@@ -3,7 +3,8 @@ package clinica.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 @Entity
 @Getter @Setter
@@ -17,5 +18,5 @@ public class Calendario {
     private Boolean ativo = true;
 
     @Column(name = "data",nullable = false)
-    private LocalDateTime data;
+    private Timestamp data;
 }

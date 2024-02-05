@@ -5,5 +5,5 @@ export class Secretaria extends Usuario{
     rg!: string;
     cpf!: string;
     dataNacimento!: string;
-    clinicaId!: Clinica;
+    clinica!: Clinica;
 }

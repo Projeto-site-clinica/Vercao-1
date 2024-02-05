@@ -11,5 +11,5 @@ public class SecretariaDTO extends UsuarioDTO {
 
     private String dataNacimento;
 
-    private ClinicaDTO clinicaId;
+    private ClinicaDTO clinica;
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Getter @Setter
@@ -25,7 +25,7 @@ public class Ticket {
     private Doutor doutorId;
 
     @Column(name = "log_marcar",nullable = false)
-    private LocalDateTime logMarcar;
+    private Timestamp logMarcar;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "data",nullable = false)

@@ -54,7 +54,7 @@ public class Usuario implements UserDetails {
     @Column(name = "rua",nullable = false)
     private String rua;
 
-    @Column(name = "bairro",nullable = false)
+    @Column(name = "bairro")
     private String bairro;
 
     @Column(name = "numero",nullable = false)

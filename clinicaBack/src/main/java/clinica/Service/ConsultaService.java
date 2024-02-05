@@ -1,15 +1,16 @@
 package clinica.Service;
 
 import clinica.DTO.ConsultaDTO;
+import clinica.DTO.DoutorDTO;
 import clinica.DTO.MensagemDTO;
 import clinica.Entity.Consulta;
+import clinica.Entity.Doutor;
 import clinica.Repository.ConsultaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class ConsultaService {
         return new MensagemDTO("Consulta cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarConsulta(Long id, ConsultaDTO consultaDTO) {
+        consultaDTO.setId(id);
         Consulta consulta = toConsulta(consultaDTO);
         consultaRepository.save(consulta);
         return new MensagemDTO("Consulta atualizado com sucesso!", HttpStatus.CREATED);
@@ -50,28 +52,40 @@ public class ConsultaService {
         consultaRepository.save(consulta);
     }
 
-    public ConsultaDTO consultaToDTO(Consulta Consulta){
-        ConsultaDTO ConsultaDTO = new ConsultaDTO();
+    public ConsultaDTO consultaToDTO(Consulta consulta){
+        ConsultaDTO consultaDTO = new ConsultaDTO();
 
-        ConsultaDTO.setId(Consulta.getId());
-        ConsultaDTO.setAtivo(Consulta.getAtivo());
-        ConsultaDTO.setNomeConsulta(Consulta.getNomeConsulta());
-        ConsultaDTO.setDescricao(Consulta.getDescricao());
-        ConsultaDTO.setValor(Consulta.getValor());
-        ConsultaDTO.setTempo(Consulta.getTempo());
+        consultaDTO.setId(consulta.getId());
+        consultaDTO.setAtivo(consulta.getAtivo());
+        consultaDTO.setNomeConsulta(consulta.getNomeConsulta());
+        consultaDTO.setDescricao(consulta.getDescricao());
+        consultaDTO.setValor(consulta.getValor());
+        consultaDTO.setTempo(consulta.getTempo());
 
-        return ConsultaDTO;
+        DoutorDTO doutorDTO = new DoutorDTO();
+        if (consulta.getDoutor() != null){
+            consultaDTO.setId(consulta.getDoutor().getId());
+            consultaDTO.setDoutor(doutorDTO);
+        }
+
+        return consultaDTO;
     }
 
-    public Consulta toConsulta(ConsultaDTO ConsultaDTO){
+    public Consulta toConsulta(ConsultaDTO consultaDTO){
         Consulta novaConsulta = new Consulta();
 
-        novaConsulta.setId(ConsultaDTO.getId());
-        novaConsulta.setAtivo(ConsultaDTO.getAtivo());
-        novaConsulta.setNomeConsulta(ConsultaDTO.getNomeConsulta());
-        novaConsulta.setDescricao(ConsultaDTO.getDescricao());
-        novaConsulta.setValor(ConsultaDTO.getValor());
-        novaConsulta.setTempo(ConsultaDTO.getTempo());
+        novaConsulta.setId(consultaDTO.getId());
+        novaConsulta.setAtivo(consultaDTO.getAtivo());
+        novaConsulta.setNomeConsulta(consultaDTO.getNomeConsulta());
+        novaConsulta.setDescricao(consultaDTO.getDescricao());
+        novaConsulta.setValor(consultaDTO.getValor());
+        novaConsulta.setTempo(consultaDTO.getTempo());
+
+        Doutor doutor = new Doutor();
+        if (consultaDTO.getDoutor() != null){
+            novaConsulta.setId(consultaDTO.getDoutor().getId());
+            novaConsulta.setDoutor(doutor);
+        }
 
         return novaConsulta;
     }

@@ -13,12 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from './interceptors/httpinterceptor.service';
 import { HomeComponent } from './componentes/home/home.component';
 import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.component';
-import { DoutorDetalhesComponent } from './componentes/perfil/doutor-detalhes/doutor-detalhes.component';
+import { ConsultaDetalhesComponent } from './componentes/perfil/consulta-detalhes/consulta-detalhes.component';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { DoutorDetalhesComponent } from './componentes/perfil/doutor-detalhes/do
     PerfilComponent,
     HomeComponent,
     AgendamentosComponent,
-    DoutorDetalhesComponent,
+    ConsultaDetalhesComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,8 @@ import { DoutorDetalhesComponent } from './componentes/perfil/doutor-detalhes/do
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule,
-    NgbModule
+    NgbModule,
+    NgbDatepickerModule
   ],
   providers: [
     httpInterceptorProviders,

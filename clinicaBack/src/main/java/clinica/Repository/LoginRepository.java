@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface LoginRepository extends JpaRepository<Usuario, Long>{
     @Query("FROM Usuario WHERE ativo = true AND username = :login")
     public Optional<Usuario> findByUsername(String login);
+
+    @Query(value = "SELECT password FROM usuario WHERE id = :id",nativeQuery = true)
+    String findSenhaById(Long id);
 }

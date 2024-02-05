@@ -10,7 +10,4 @@ import java.util.List;
 public interface ClinicaRepository extends JpaRepository<Clinica, Long> {
     @Query("FROM Clinica WHERE ativo = true")
     List<Clinica> findClinicaByAtivo();
-
-    @Query(value = "SELECT password FROM clinica WHERE id = :id",nativeQuery = true)
-    String findSenhaById(Long id);
 }

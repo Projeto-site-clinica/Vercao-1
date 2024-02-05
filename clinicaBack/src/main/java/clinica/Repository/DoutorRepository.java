@@ -11,7 +11,4 @@ import java.util.List;
 public interface DoutorRepository extends JpaRepository<Doutor, Long> {
     @Query("FROM Doutor WHERE ativo = true")
     List<Doutor> findDoutorByAtivo();
-
-    @Query(value = "SELECT password FROM doutor WHERE id = :id",nativeQuery = true)
-    String findSenhaById(Long id);
 }

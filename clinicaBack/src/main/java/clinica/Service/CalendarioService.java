@@ -33,6 +33,7 @@ public class CalendarioService {
         return new MensagemDTO("Calendario cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarCalendario(Long id, CalendarioDTO calendarioDTO) {
+        calendarioDTO.setId(id);
         Calendario calendario = toCalendario(calendarioDTO);
         calendarioRepository.save(calendario);
         return new MensagemDTO("Calendario atualizado com sucesso!", HttpStatus.CREATED);

@@ -3,7 +3,7 @@ package clinica.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter @Setter
@@ -22,11 +22,11 @@ public class DoutorDTO extends UsuarioDTO {
 
     private Boolean solicitacao = false;
 
-    private ClinicaDTO clinicaId;
+    private ClinicaDTO clinica;
 
     private List<ConsultaDTO> consulta;
 
-    private LocalTime horarioStart;
+    private Timestamp horarioStart;
 
-    private LocalTime horarioEnd;
+    private Timestamp horarioEnd;
 }

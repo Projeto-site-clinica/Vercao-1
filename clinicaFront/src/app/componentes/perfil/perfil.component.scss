@@ -29,3 +29,25 @@ label{
     border-radius: 1rem;
 
 }
+
+input:disabled{
+    border: none;
+    color: black;
+    background-color: #fff;
+}
+
+.alert{
+    padding: .2rem;
+    margin-bottom: .5rem;
+    display: flex;
+}
+.error{
+    border-color: red;
+}
+.error-color{
+    color: red;
+    font-size: 12px;
+}
+hr{
+    margin-top: 5px;
+}

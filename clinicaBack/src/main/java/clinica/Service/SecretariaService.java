@@ -1,8 +1,12 @@
 package clinica.Service;
 
+import clinica.DTO.ClinicaDTO;
+import clinica.DTO.DoutorDTO;
 import clinica.DTO.MensagemDTO;
 import clinica.DTO.SecretariaDTO;
+import clinica.Entity.Clinica;
 import clinica.Entity.Secretaria;
+import clinica.Repository.LoginRepository;
 import clinica.Repository.SecretariaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,8 @@ import java.util.List;
 public class SecretariaService {
     @Autowired
     private SecretariaRepository secretariaRepository;
+    @Autowired
+    private LoginRepository loginRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -37,8 +43,9 @@ public class SecretariaService {
         return new MensagemDTO("Secretaria cadastrada com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarSecretaria(Long id, SecretariaDTO secretariaDTO) {
+        secretariaDTO.setId(id);
         Secretaria secretaria = toSecretaria(secretariaDTO);
-        String senha= secretariaRepository.findSenhaById(secretaria.getId());
+        String senha= loginRepository.findSenhaById(secretaria.getId());
         secretaria.setPassword(senha);
         secretariaRepository.save(secretaria);
         return new MensagemDTO("Secretaria atualizado com sucesso!", HttpStatus.CREATED);
@@ -79,6 +86,12 @@ public class SecretariaService {
         secretariaDTO.setRg(secretaria.getRg());
         secretariaDTO.setDataNacimento(secretaria.getDataNacimento());
 
+        ClinicaDTO clinicaDTO = new ClinicaDTO();
+        if (secretaria.getClinica() != null){
+            secretariaDTO.setId(secretaria.getClinica().getId());
+            secretariaDTO.setClinica(clinicaDTO);
+        }
+
         return secretariaDTO;
     }
 
@@ -105,6 +118,12 @@ public class SecretariaService {
         novoSecretaria.setCpf(secretariaDTO.getCpf());
         novoSecretaria.setRg(secretariaDTO.getRg());
         novoSecretaria.setDataNacimento(secretariaDTO.getDataNacimento());
+
+        Clinica clinica = new Clinica();
+        if (secretariaDTO.getClinica() != null){
+            novoSecretaria.setId(secretariaDTO.getClinica().getId());
+            novoSecretaria.setClinica(clinica);
+        }
 
         return novoSecretaria;
     }

@@ -31,6 +31,7 @@ public class TicketService {
         return new MensagemDTO("Ticket cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarTicket(Long id, TicketDTO ticketDTO) {
+        ticketDTO.setId(id);
         Ticket ticket = toTicket(ticketDTO);
         ticketRepository.save(ticket);
         return new MensagemDTO("Ticket atualizado com sucesso!", HttpStatus.CREATED);

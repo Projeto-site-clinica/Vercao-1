@@ -2,7 +2,8 @@ package clinica.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 @Getter @Setter
 public class CalendarioDTO {
@@ -10,5 +11,5 @@ public class CalendarioDTO {
 
     private Boolean ativo = true;
 
-    private LocalDateTime data;
+    private Timestamp data;
 }

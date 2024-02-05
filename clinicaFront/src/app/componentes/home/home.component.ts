@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Doutor } from 'src/app/models/doutor';
 import { DoutorService } from 'src/app/service/doutor.service';
 
@@ -20,6 +20,9 @@ export class HomeComponent {
 
   doutorService = inject(DoutorService);
   modalService = inject(NgbModal);
+
+  model!: NgbDateStruct;
+	date!: { year: number; month: number };
   
   constructor(){
     this.listaDoutores();
@@ -56,4 +59,6 @@ export class HomeComponent {
       });
     }
   }
+
+  
 }

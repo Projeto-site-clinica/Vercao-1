@@ -20,5 +20,5 @@ public class Secretaria extends Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name = "clinica_id")
-    private Clinica clinicaId;
+    private Clinica clinica;
 }
