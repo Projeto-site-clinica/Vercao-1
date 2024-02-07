@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Consulta } from 'src/app/models/consulta';
 import { Doutor } from 'src/app/models/doutor';
 import { Mensagem } from 'src/app/models/mensagem';
+import { Usuario } from 'src/app/models/usuario';
 import { ConsultaService } from 'src/app/service/consulta.service';
 import { DoutorService } from 'src/app/service/doutor.service';
 
@@ -12,7 +13,7 @@ import { DoutorService } from 'src/app/service/doutor.service';
   styleUrls: ['./consulta-detalhes.component.scss']
 })
 export class ConsultaDetalhesComponent {
-  @Input() doutor1: Doutor = new Doutor();
+  @Input() doutor: Doutor = new Doutor();
   @Input() consulta: Consulta = new Consulta();
   @Output() retorno = new EventEmitter<Mensagem>;
 
@@ -21,16 +22,16 @@ export class ConsultaDetalhesComponent {
   toastr = inject(ToastrService);
 
   salvar(formulario: any) {
-    console.log(this.doutor1);
+    console.log(this.doutor);
     if (!formulario.valid){
       this.toastr.error('Formulário inválido. Preencha os campos corretamente');
     }else{
-      // this.doutor.consulta.push({ ...this.doutor.consulta, ...formulario.value });
-      console.log(this.doutor1);
-      this.consulta.doutor = this.doutor1;
+      console.log(this.consulta);
+      console.log(this.doutor);
+      this.consulta.doutor = this.doutor;
       this.consultaService.save(this.consulta).subscribe({
         next: mensagem => {
-          console.log(this.doutor1);
+          console.log(this.doutor);
           console.log(this.consulta);
           this.toastr.success("Consulta adicionada com Sucesso!");
           this.retorno.emit(mensagem);

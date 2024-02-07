@@ -29,7 +29,7 @@ public class Consulta {
     @Column(name = "tempo",nullable = false)
     private Timestamp tempo;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doutor")
     @JsonIgnoreProperties("consulta")
     private Doutor doutor;

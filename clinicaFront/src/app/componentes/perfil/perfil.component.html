@@ -90,7 +90,7 @@
             <div class="col-lg-3">
                 <label class="form-label">Número:</label>
                 <div class="d-flex align-items-center text-center justify-content-between">
-                    <p class="m-0 p-0">{{ paciente.number }}</p>
+                    <p class="m-0 p-0">{{ paciente.numero }}</p>
                     <button><img src="../../../assets/editar.svg"></button>
                 </div>
                 <hr>
@@ -225,7 +225,7 @@
             <div class="col-lg-3">
                 <label class="form-label">Número:</label>
                 <div class="d-flex align-items-center text-center justify-content-between">
-                    <p class="m-0 p-0">{{ doutor.number }}</p>
+                    <p class="m-0 p-0">{{ doutor.numero }}</p>
                     <button><img src="../../../assets/editar.svg"></button>
                 </div>
                 <hr>
@@ -305,13 +305,13 @@
         <div class="w-100 col-lg-12 mt-4">
             <div class="d-flex justify-content-between">
                 <h4 class="form-label">Serviços</h4>
-                <button class="adicionar d-flex justify-content-end" (click)="adicionarConsulta(modalConsulta ,doutor)">Adicionar</button>
+                <button class="adicionar d-flex justify-content-end" (click)="adicionarConsulta(modalConsulta ,doutor)">Adicionar Consulta</button>
             </div>
             <hr>
         </div>
         <div class="w-100 col-lg-12">
             <ul>
-                <li *ngFor="let consulta of doutor.consulta">
+                <li *ngFor="let consulta of doutor.consulta" class="d-flex justify-content-between">
                 <p>{{ consulta.nomeConsulta }}</p>
                 <p>{{ consulta.valor }}</p>
                 </li>
@@ -326,8 +326,8 @@
         </div>
         <div class="modal-body">
           
-          <app-consulta-detalhes [doutor1]="doutor" (retorno)="atualizarLista($event)" ></app-consulta-detalhes>
-                  
+          <app-consulta-detalhes [doutor]="doutor"  (retorno)="atualizarLista($event)" ></app-consulta-detalhes>
+                  <!-- [consulta]="consultaParaEditar" -->
         </div>
         <div class="modal-footer footerModal">
           <button type="button" class="btn btn-danger " (click)="modal.close('Close click')">Close</button>
@@ -398,7 +398,7 @@
             <div class="col-lg-3">
                 <label class="form-label">Número:</label>
                 <div class="d-flex align-items-center text-center justify-content-between">
-                    <p class="m-0 p-0">{{ clinica.number }}</p>
+                    <p class="m-0 p-0">{{ clinica.numero }}</p>
                     <button><img src="../../../assets/editar.svg"></button>
                 </div>
                 <hr>

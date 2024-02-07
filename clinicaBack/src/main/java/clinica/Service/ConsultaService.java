@@ -64,7 +64,7 @@ public class ConsultaService {
 
         DoutorDTO doutorDTO = new DoutorDTO();
         if (consulta.getDoutor() != null){
-            consultaDTO.setId(consulta.getDoutor().getId());
+            doutorDTO.setId(consulta.getDoutor().getId());
             consultaDTO.setDoutor(doutorDTO);
         }
 
@@ -83,7 +83,7 @@ public class ConsultaService {
 
         Doutor doutor = new Doutor();
         if (consultaDTO.getDoutor() != null){
-            novaConsulta.setId(consultaDTO.getDoutor().getId());
+            doutor.setId(consultaDTO.getDoutor().getId());
             novaConsulta.setDoutor(doutor);
         }
 

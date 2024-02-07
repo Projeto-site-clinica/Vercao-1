@@ -123,7 +123,20 @@ export class PerfilComponent {
 
   atualizarLista(mensagem: Mensagem) {
     this.modalService.dismissAll();
-    this.loginService.getUser().role == "DOUTOR"
+
+    let aux = this.loginService.getUser().id;
+    let id = 0;
+    if (aux != null)
+      id = +aux;
+    if (this.loginService.getUser().role == "PACIENTE")
+      this.getPaciente(id);
+    else if (this.loginService.getUser().role == "DOUTOR")
+      this.getDoutor(id);
+    else if (this.loginService.getUser().role == "CLININCA")
+      this.getClinica(id);
+    else if (this.loginService.getUser().role == "SECRETARIA")
+      this.getSecretaria(id);
+    
     this.retorno.emit("ok");
   }
 

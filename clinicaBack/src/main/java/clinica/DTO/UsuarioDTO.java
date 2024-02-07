@@ -37,7 +37,7 @@ public class UsuarioDTO {
 
     private String bairro;
 
-    private int numero;
+    private Integer numero;
 
     private String complemento;
 

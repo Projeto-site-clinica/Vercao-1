@@ -91,7 +91,7 @@
                         <label for="num" class="form-label"
                             [class.error-color]="!num.valid && num.touched">Numéro:</label>
                         <input #num="ngModel" required type="text" class="form-control"
-                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="paciente.number">
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="paciente.numero">
                         <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
                             obrigatório!
                         </div>
@@ -252,7 +252,7 @@
                         <label for="num" class="form-label"
                             [class.error-color]="!num.valid && num.touched">Numéro:</label>
                         <input #num="ngModel" required type="text" class="form-control"
-                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="doutor.number">
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="doutor.numero">
                         <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
                             obrigatório!
                         </div>
@@ -410,7 +410,7 @@
                         <label for="num" class="form-label"
                             [class.error-color]="!num.valid && num.touched">Numéro:</label>
                         <input #num="ngModel" required type="text" class="form-control"
-                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="clinica.number">
+                            [class.error]="!num.valid && num.touched" name="num" id="num" [(ngModel)]="clinica.numero">
                         <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
                             obrigatório!
                         </div>
@@ -580,7 +580,7 @@
                             [class.error-color]="!num.valid && num.touched">Numéro:</label>
                         <input #num="ngModel" required type="text" class="form-control"
                             [class.error]="!num.valid && num.touched" name="num" id="num"
-                            [(ngModel)]="secretaria.number">
+                            [(ngModel)]="secretaria.numero">
                         <div *ngIf="!num.valid && num.touched" class="error-color alert">*Numéro é
                             obrigatório!
                         </div>

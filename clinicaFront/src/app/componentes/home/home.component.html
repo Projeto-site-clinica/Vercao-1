@@ -1,4 +1,4 @@
-<!-- <div>
+<div>
     <header>
         <div class="w-100">
             <input class="w-100" type="text" placeholder="Pesquisar por nome" [(ngModel)]="termoPesquisa"
@@ -21,7 +21,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <app-doutor-detalhes [doutor]="doutorSelecionado"></app-doutor-detalhes>
+      <app-doutor-perfil></app-doutor-perfil>
     </div>
     <div class="modal-footer footerModal">
       <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Fechar</button>
@@ -37,4 +37,4 @@
 
   <p>Simple datepicker</p>
 
-<ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next" /> -->
+<ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next" />

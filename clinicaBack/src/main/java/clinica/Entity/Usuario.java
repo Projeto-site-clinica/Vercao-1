@@ -54,11 +54,11 @@ public class Usuario implements UserDetails {
     @Column(name = "rua",nullable = false)
     private String rua;
 
-    @Column(name = "bairro")
+    @Column(name = "bairro",nullable = false)
     private String bairro;
 
     @Column(name = "numero",nullable = false)
-    private int numero;
+    private Integer numero;
 
     @Column(name = "complemento")
     private String complemento;

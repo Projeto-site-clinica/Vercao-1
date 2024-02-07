@@ -19,6 +19,7 @@ import { httpInterceptorProviders } from './interceptors/httpinterceptor.service
 import { HomeComponent } from './componentes/home/home.component';
 import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.component';
 import { ConsultaDetalhesComponent } from './componentes/perfil/consulta-detalhes/consulta-detalhes.component';
+import { DoutorPerfilComponent } from './componentes/home/doutor-perfil/doutor-perfil.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ConsultaDetalhesComponent } from './componentes/perfil/consulta-detalhe
     HomeComponent,
     AgendamentosComponent,
     ConsultaDetalhesComponent,
+    DoutorPerfilComponent,
   ],
   imports: [
     BrowserModule,

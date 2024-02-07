@@ -12,7 +12,7 @@ export class Usuario {
     cidade!: string;
     rua!: string;
     bairro!: string;
-    number!: number;
+    numero!: number;
     complemento!: string;
     referencia!: string;
 }
