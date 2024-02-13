@@ -20,6 +20,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.component';
 import { ConsultaDetalhesComponent } from './componentes/perfil/consulta-detalhes/consulta-detalhes.component';
 import { DoutorPerfilComponent } from './componentes/home/doutor-perfil/doutor-perfil.component';
+import { TicketDetalhesComponent } from './componentes/home/ticket-detalhes/ticket-detalhes.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { DoutorPerfilComponent } from './componentes/home/doutor-perfil/doutor-p
     AgendamentosComponent,
     ConsultaDetalhesComponent,
     DoutorPerfilComponent,
+    TicketDetalhesComponent,
   ],
   imports: [
     BrowserModule,

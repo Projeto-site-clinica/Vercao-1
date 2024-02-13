@@ -1,1 +1,36 @@
-<p>doutor-perfil works!</p>
+<div>
+    <div>
+        <h2>{{ doutor.nome }}</h2>
+    </div>
+    <div>
+        <p>Endereço:</p>
+        <h5>{{ doutor.rua }} , {{ doutor.numero }} - {{ doutor.bairro }}</h5>
+        <p>{{ doutor.cidade }} - {{ doutor.estado }} , {{ doutor.cep }}</p>
+    </div>
+    <div>
+        <h3>Serviçios</h3>
+        <ul>
+            <li *ngFor="let consulta of doutor.consulta" class="d-flex justify-content-between">
+            <p>{{ consulta.nomeConsulta }}</p>
+            <p>{{ consulta.valor }}</p>
+            </li>
+        </ul>
+    </div>
+
+    <button (click)="cadastrarTicket(modalAgenda, doutor)">AGENDAR</button>
+</div>
+
+<ng-template #modalAgenda let-modal>
+    <div class="modal-header cabecalhoModal">
+      <h4 class="modal-title">Faça sua agenda:</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      
+      <app-ticket-detalhes [doutor]="doutor" (retorno)="atualizarLista($event)"></app-ticket-detalhes>
+              <!-- [consulta]="consultaParaEditar" -->
+    </div>
+    <div class="modal-footer footerModal">
+      <button type="button" class="btn btn-danger " (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

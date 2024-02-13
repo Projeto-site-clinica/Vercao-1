@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Doutor } from 'src/app/models/doutor';
+import { Mensagem } from 'src/app/models/mensagem';
 import { DoutorService } from 'src/app/service/doutor.service';
 
 @Component({
@@ -35,6 +36,11 @@ export class HomeComponent {
         this.listaDoutorseOrginal = listarDoutores;
       }
     })
+  }
+
+  atualizarLista(mensagem: Mensagem) {
+    this.modalService.dismissAll();
+    this.retorno.emit("ok");
   }
 
   mostrarDetalhes(doutor: Doutor, modal: any, indice: number) {

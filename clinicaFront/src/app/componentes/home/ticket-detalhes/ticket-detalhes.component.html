@@ -1,0 +1,18 @@
+<form #formulario="ngForm" (ngSubmit)="salvar(formulario)" class="mb-3">
+    <p>{{ doutor.nome }}</p>
+    <select #consultaInput="ngModel" required [compareWith]="byId" class="form-select" name="consulta" [(ngModel)]="ticket.consulta">
+        <option [ngValue]="undefined">Selecione...</option>
+        <option *ngFor="let consultaItem of doutor?.consulta" [ngValue]="consultaItem">{{ consultaItem.nomeConsulta }}</option>
+    </select>
+    
+    <div>
+        <select #data="ngModel" required [compareWith]="byId" class="form-select" name="data" [(ngModel)]="ticket.data">
+            <option [ngValue]="undefined">Selecione...</option>
+            <option [ngValue]="data">10:00 AM</option>
+        </select>
+        <!-- <button [(ngModel)]="ticket.data">10:00 AM</button> -->
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <button type="submit" class="salvar">Salvar</button>
+    </div>
+</form>

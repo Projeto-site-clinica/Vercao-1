@@ -29,4 +29,8 @@ public class DoutorDTO extends UsuarioDTO {
     private Timestamp horarioStart;
 
     private Timestamp horarioEnd;
+
+    private Timestamp intervaloStart;
+
+    private Timestamp intervaloEnd;
 }

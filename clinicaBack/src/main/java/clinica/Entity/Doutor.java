@@ -46,6 +46,12 @@ public class Doutor extends Usuario {
     @Column(name = "horario_end")
     private Timestamp horarioEnd;
 
+    @Column(name = "intervalo_start")
+    private Timestamp intervaloStart;
+
+    @Column(name = "intervalo_end")
+    private Timestamp intervaloEnd;
+
 //    @Column(name = "perfis")
 //    private List<Perfis> perfis;
 }

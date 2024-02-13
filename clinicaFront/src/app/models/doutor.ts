@@ -14,4 +14,6 @@ export class Doutor extends Usuario{
     consulta!: Consulta[];
     horarioStart!: Date;
     horarioEnd!: Date;
+    intervaloStart!: Date;
+    intervaloEnd!: Date;
 }

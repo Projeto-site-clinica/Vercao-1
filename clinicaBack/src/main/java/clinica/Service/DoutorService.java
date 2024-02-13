@@ -90,6 +90,8 @@ public class DoutorService {
         doutorDTO.setSolicitacao(doutor.getSolicitacao());
         doutorDTO.setHorarioStart(doutor.getHorarioStart());
         doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
+        doutorDTO.setIntervaloStart(doutor.getIntervaloStart());
+        doutorDTO.setIntervaloEnd(doutor.getIntervaloEnd());
 
         ClinicaDTO clinicaDTO = new ClinicaDTO();
         if (doutor.getClinica() != null){
@@ -156,6 +158,8 @@ public class DoutorService {
         novoDoutor.setSolicitacao(doutorDTO.getSolicitacao());
         novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
         novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
+        novoDoutor.setIntervaloStart(doutorDTO.getIntervaloStart());
+        novoDoutor.setIntervaloEnd(doutorDTO.getIntervaloEnd());
 
         if (doutorDTO.getClinica() != null) {
             Clinica clinica = new Clinica();
