@@ -66,9 +66,9 @@ public class TicketService {
         doutorDTO.setId(ticket.getDoutorId().getId());
         ticketDTO.setDoutorId(doutorDTO);
 
-        CalendarioDTO calendarioDTO = new CalendarioDTO();
-        calendarioDTO.setId(ticket.getData().getId());
-        ticketDTO.setData(calendarioDTO);
+        DoutorHorarioDTO doutorHorarioDTO = new DoutorHorarioDTO();
+        doutorHorarioDTO.setId(ticket.getHorario().getId());
+        ticketDTO.setHorario(doutorHorarioDTO);
 
         ConsultaDTO consultaDTO = new ConsultaDTO();
         consultaDTO.setId(ticket.getConsulta().getId());
@@ -92,9 +92,9 @@ public class TicketService {
         doutor.setId(ticketDTO.getDoutorId().getId());
         novoTicket.setDoutorId(doutor);
 
-        Calendario calendario = new Calendario();
-        calendario.setId(ticketDTO.getData().getId());
-        novoTicket.setData(calendario);
+        DoutorHorario doutorHorario = new DoutorHorario();
+        doutorHorario.setId(ticketDTO.getHorario().getId());
+        novoTicket.setHorario(doutorHorario);
 
         Consulta consulta = new Consulta();
         consulta.setId(ticketDTO.getConsulta().getId());

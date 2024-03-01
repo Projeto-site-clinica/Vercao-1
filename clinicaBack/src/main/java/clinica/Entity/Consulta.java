@@ -27,12 +27,12 @@ public class Consulta {
     private String descricao;
 
     @Column(name = "tempo",nullable = false)
-    private Timestamp tempo;
+    private Timestamp duracao;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doutor")
+    @JoinColumn(name = "doutor_consulta")
     @JsonIgnoreProperties("consulta")
-    private Doutor doutor;
+    private Doutor doutorConsulta;
 
     //intervalo
 }

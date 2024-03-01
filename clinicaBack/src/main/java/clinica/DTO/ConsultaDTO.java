@@ -12,11 +12,11 @@ public class ConsultaDTO {
 
     private String nomeConsulta;
 
-    private double valor;
+    private Double valor;
 
     private String descricao;
 
-    private Timestamp tempo;
+    private Timestamp duracao;
 
-    private DoutorDTO doutor;
+    private DoutorDTO doutorConsulta;
 }

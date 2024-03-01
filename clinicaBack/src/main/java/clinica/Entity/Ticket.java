@@ -29,7 +29,7 @@ public class Ticket {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "data",nullable = false)
-    private Calendario data;
+    private DoutorHorario horario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consulta_ticket",nullable = false)

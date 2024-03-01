@@ -1,13 +1,13 @@
-package clinica.Repository;
-
-import clinica.Entity.Calendario;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import java.util.List;
-
-@Repository
-public interface CalendarioRepository extends JpaRepository<Calendario, Long> {
-    @Query("FROM Calendario WHERE ativo = true")
-    List<Calendario> findCalendarioByAtivo();
-}
+//package clinica.Repository;
+//
+//import clinica.Entity.Calendario;
+//import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.data.jpa.repository.Query;
+//import org.springframework.stereotype.Repository;
+//import java.util.List;
+//
+//@Repository
+//public interface CalendarioRepository extends JpaRepository<Calendario, Long> {
+//    @Query("FROM Calendario WHERE ativo = true")
+//    List<Calendario> findCalendarioByAtivo();
+//}

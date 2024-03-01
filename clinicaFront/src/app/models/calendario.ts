@@ -1,4 +1,4 @@
-export class Calendario {
-    id!: number;
-    data!: Date;
-}
+// export class Calendario {
+//     id!: number;
+//     data!: Date;
+// }

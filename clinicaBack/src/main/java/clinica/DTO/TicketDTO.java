@@ -16,7 +16,7 @@ public class TicketDTO {
 
     private Timestamp logMarcar;
 
-    private CalendarioDTO data;
+    private DoutorHorarioDTO horario;
 
     private ConsultaDTO consulta;
 }

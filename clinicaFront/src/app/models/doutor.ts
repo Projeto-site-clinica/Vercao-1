@@ -1,6 +1,7 @@
 import { Usuario } from "./usuario";
 import { Clinica } from "./clinica";
 import { Consulta } from "./consulta";
+import { DoutorHorario } from "./doutor-horario";
 
 export class Doutor extends Usuario{
     rg!: string;
@@ -11,9 +12,6 @@ export class Doutor extends Usuario{
     descricao!: string;
     solicitacao: boolean = false;
     clinica!: Clinica;
-    consulta!: Consulta[];
-    horarioStart!: Date;
-    horarioEnd!: Date;
-    intervaloStart!: Date;
-    intervaloEnd!: Date;
+    consultas!: Consulta[];
+    horarios!: DoutorHorario[];
 }

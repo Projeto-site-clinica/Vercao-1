@@ -5,6 +5,6 @@ export class Consulta {
     nomeConsulta!: string;
     valor!: number;
     descricao!: string;
-    tempo!: Date;
-    doutor!: Doutor;
+    duracao!: Date;
+    doutorConsulta!: Doutor;
 }

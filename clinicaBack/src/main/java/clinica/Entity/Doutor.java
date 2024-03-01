@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -37,20 +36,11 @@ public class Doutor extends Usuario {
     @JoinColumn( name = "clinica_id")
     private Clinica clinica;
 
-    @OneToMany(mappedBy = "doutor", cascade = CascadeType.ALL)
-    private List<Consulta> consulta;
+    @OneToMany(mappedBy = "doutorConsulta", cascade = CascadeType.ALL)
+    private List<Consulta> consultas;
 
-    @Column(name = "horario_start")
-    private Timestamp horarioStart;
-
-    @Column(name = "horario_end")
-    private Timestamp horarioEnd;
-
-    @Column(name = "intervalo_start")
-    private Timestamp intervaloStart;
-
-    @Column(name = "intervalo_end")
-    private Timestamp intervaloEnd;
+    @OneToMany(mappedBy = "doutorHorario", cascade = CascadeType.ALL)
+    private List<DoutorHorario> horarios;
 
 //    @Column(name = "perfis")
 //    private List<Perfis> perfis;

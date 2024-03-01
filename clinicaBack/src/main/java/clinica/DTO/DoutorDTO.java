@@ -3,7 +3,6 @@ package clinica.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Getter @Setter
@@ -24,13 +23,7 @@ public class DoutorDTO extends UsuarioDTO {
 
     private ClinicaDTO clinica;
 
-    private List<ConsultaDTO> consulta;
+    private List<ConsultaDTO> consultas;
 
-    private Timestamp horarioStart;
-
-    private Timestamp horarioEnd;
-
-    private Timestamp intervaloStart;
-
-    private Timestamp intervaloEnd;
+    private List<DoutorHorarioDTO> horarios;
 }

@@ -88,24 +88,19 @@ public class DoutorService {
         doutorDTO.setAvaliacao(doutor.getAvaliacao());
         doutorDTO.setDescricao(doutor.getDescricao());
         doutorDTO.setSolicitacao(doutor.getSolicitacao());
-        doutorDTO.setHorarioStart(doutor.getHorarioStart());
-        doutorDTO.setHorarioEnd(doutor.getHorarioEnd());
-        doutorDTO.setIntervaloStart(doutor.getIntervaloStart());
-        doutorDTO.setIntervaloEnd(doutor.getIntervaloEnd());
 
-        ClinicaDTO clinicaDTO = new ClinicaDTO();
         if (doutor.getClinica() != null){
+            ClinicaDTO clinicaDTO = new ClinicaDTO();
             clinicaDTO.setId(doutor.getClinica().getId());
             doutorDTO.setClinica(clinicaDTO);
         }
 
-
         List<ConsultaDTO> listaCons = new ArrayList<>();
-        if(doutor.getConsulta() != null)
-            for(int i=0; i<doutor.getConsulta().size(); i++){
-                listaCons.add(consultaToDTO(doutor.getConsulta().get(i)));
+        if(doutor.getConsultas() != null)
+            for(int i=0; i<doutor.getConsultas().size(); i++){
+                listaCons.add(consultaToDTO(doutor.getConsultas().get(i)));
             }
-        doutorDTO.setConsulta(listaCons);
+        doutorDTO.setConsultas(listaCons);
 
         return doutorDTO;
     }
@@ -118,14 +113,13 @@ public class DoutorService {
         consultaDTO.setNomeConsulta(consulta.getNomeConsulta());
         consultaDTO.setDescricao(consulta.getDescricao());
         consultaDTO.setValor(consulta.getValor());
-        consultaDTO.setTempo(consulta.getTempo());
+        consultaDTO.setDuracao(consulta.getDuracao());
 
-        DoutorDTO doutorDTO = new DoutorDTO();
-        if (consulta.getDoutor() != null){
-            consultaDTO.setId(consulta.getDoutor().getId());
-            consultaDTO.setDoutor(doutorDTO);
+        if (consulta.getDoutorConsulta() != null){
+            DoutorDTO doutorDTO = new DoutorDTO();
+            consultaDTO.setId(consulta.getDoutorConsulta().getId());
+            consultaDTO.setDoutorConsulta(doutorDTO);
         }
-
         return consultaDTO;
     }
 
@@ -156,10 +150,6 @@ public class DoutorService {
         novoDoutor.setAvaliacao(doutorDTO.getAvaliacao());
         novoDoutor.setDescricao(doutorDTO.getDescricao());
         novoDoutor.setSolicitacao(doutorDTO.getSolicitacao());
-        novoDoutor.setHorarioStart(doutorDTO.getHorarioStart());
-        novoDoutor.setHorarioEnd(doutorDTO.getHorarioEnd());
-        novoDoutor.setIntervaloStart(doutorDTO.getIntervaloStart());
-        novoDoutor.setIntervaloEnd(doutorDTO.getIntervaloEnd());
 
         if (doutorDTO.getClinica() != null) {
             Clinica clinica = new Clinica();
@@ -168,11 +158,11 @@ public class DoutorService {
         }
 
         List<Consulta> listaCons = new ArrayList<>();
-        if(doutorDTO.getConsulta() != null)
-            for(int i=0; i<doutorDTO.getConsulta().size(); i++){
-                listaCons.add(toConsulta(novoDoutor,doutorDTO.getConsulta().get(i)));
+        if(doutorDTO.getConsultas() != null)
+            for(int i=0; i<doutorDTO.getConsultas().size(); i++){
+                listaCons.add(toConsulta(novoDoutor,doutorDTO.getConsultas().get(i)));
             }
-        novoDoutor.setConsulta(listaCons);
+        novoDoutor.setConsultas(listaCons);
 
         return novoDoutor;
     }
@@ -185,14 +175,13 @@ public class DoutorService {
         novaConsulta.setNomeConsulta(consultaDTO.getNomeConsulta());
         novaConsulta.setDescricao(consultaDTO.getDescricao());
         novaConsulta.setValor(consultaDTO.getValor());
-        novaConsulta.setTempo(consultaDTO.getTempo());
+        novaConsulta.setDuracao(consultaDTO.getDuracao());
 
-        Doutor doutor = new Doutor();
-        if (consultaDTO.getDoutor() != null){
-            novaConsulta.setId(consultaDTO.getDoutor().getId());
-            novaConsulta.setDoutor(doutor);
+        if (consultaDTO.getDoutorConsulta() != null){
+            Doutor doutor = new Doutor();
+            novaConsulta.setId(consultaDTO.getDoutorConsulta().getId());
+            novaConsulta.setDoutorConsulta(doutor);
         }
-
         return novaConsulta;
     }
 }
