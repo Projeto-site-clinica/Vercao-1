@@ -28,7 +28,7 @@ export class ConsultaDetalhesComponent {
     }else{
       console.log(this.consulta);
       console.log(this.doutor);
-      this.consulta.doutor = this.doutor;
+      this.consulta.doutorConsulta = this.doutor;
       this.consultaService.save(this.consulta).subscribe({
         next: mensagem => {
           console.log(this.doutor);
