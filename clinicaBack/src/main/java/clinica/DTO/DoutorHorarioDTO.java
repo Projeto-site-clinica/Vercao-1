@@ -21,5 +21,5 @@ public class DoutorHorarioDTO {
 
     private Timestamp horarioFinalTarde;
 
-    private DoutorDTO doutorHorario;
+    private DoutorDTO doutorId;
 }

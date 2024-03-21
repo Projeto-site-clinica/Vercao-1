@@ -33,7 +33,7 @@ public class DoutorHorario {
     private Timestamp horarioFinalTarde;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doutor_horario")
+    @JoinColumn(name = "doutor_id")
     @JsonIgnoreProperties("horario")
-    private Doutor doutorHorario;
+    private Doutor doutorId;
 }

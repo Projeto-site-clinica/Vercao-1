@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Calendario } from 'src/app/models/calendario';
 import { Doutor } from 'src/app/models/doutor';
 import { Mensagem } from 'src/app/models/mensagem';
 import { Paciente } from 'src/app/models/paciente';
@@ -21,7 +20,6 @@ export class TicketDetalhesComponent {
 
   
   paciente: Paciente = new Paciente();
-  calendario: Calendario = new Calendario();
 
   loginService = inject(LoginService);
   pacienteService = inject(PacienteService);

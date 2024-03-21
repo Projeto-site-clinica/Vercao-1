@@ -6,6 +6,7 @@ import clinica.Entity.DoutorHorario;
 import clinica.Repository.DoutorHorarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,29 @@ public class DoutorHorarioService {
         return doutorHorarioRepository.findDoutorHorarioByAtivo().stream().map(this::doutorHorarioToDTO).toList();
     }
 
+    public MensagemDTO cadastrarDoutorHorario(DoutorHorarioDTO doutorHorarioDTO) {
+        DoutorHorario doutorHorario = toDoutorHorario(doutorHorarioDTO);
+        doutorHorarioRepository.save(doutorHorario);
+        return new MensagemDTO("Horário cadastrado com sucesso!", HttpStatus.CREATED);
+    }
+    public MensagemDTO editarDoutorHorario(Long id, DoutorHorarioDTO doutorHorarioDTO) {
+        DoutorHorario doutorHorario = toDoutorHorario(doutorHorarioDTO);
+        doutorHorarioRepository.save(doutorHorario);
+        return new MensagemDTO("Horário atualizado com sucesso!", HttpStatus.CREATED);
+    }
+
+    public MensagemDTO deletarDoutorHorario(Long id) {
+        DoutorHorario doutorBanco = doutorHorarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Doutor com ID " + id + " não existe!"));
+        desativarDoutorHorario(doutorBanco);
+        return new MensagemDTO("Horário deletado com sucesso!", HttpStatus.CREATED);
+    }
+
+    private void desativarDoutorHorario(DoutorHorario doutorHorario) {
+        doutorHorario.setAtivo(false);
+        doutorHorarioRepository.save(doutorHorario);
+    }
+
     public DoutorHorarioDTO doutorHorarioToDTO(DoutorHorario doutorHorario){
         DoutorHorarioDTO doutorHorarioDTO = new DoutorHorarioDTO();
 
@@ -39,29 +63,29 @@ public class DoutorHorarioService {
         doutorHorarioDTO.setHorarioFinalTarde(doutorHorario.getHorarioFinalTarde());
 
 
-        if (doutorHorario.getDoutorHorario() != null){
+        if (doutorHorario.getDoutorId() != null){
             DoutorDTO doutorDTO = new DoutorDTO();
-            doutorDTO.setId(doutorHorario.getDoutorHorario().getId());
-            doutorHorarioDTO.setDoutorHorario(doutorDTO);
+            doutorDTO.setId(doutorHorario.getDoutorId().getId());
+            doutorHorarioDTO.setDoutorId(doutorDTO);
         }
         return doutorHorarioDTO;
     }
 
-//    public DoutorHorario toDoutorHorario(DoutorHorarioDTO doutorHorarioDTO){
-//        DoutorHorario novoDoutorHorario = new DoutorHorario();
-//
-//        novoDoutorHorario.setId(doutorHorarioDTO.getId());
-//        novoDoutorHorario.setDiaSemana(doutorHorarioDTO.getDiaSemana());
-//        novoDoutorHorario.setHorarioInicialManha(doutorHorarioDTO.getHorarioInicialManha());
-//        novoDoutorHorario.setHorarioFinalManha(doutorHorarioDTO.getHorarioFinalManha());
-//        novoDoutorHorario.setHorarioInicialTarde(doutorHorarioDTO.getHorarioInicialTarde());
-//        novoDoutorHorario.setHorarioFinalTarde(doutorHorarioDTO.getHorarioFinalTarde());
-//
-//        if (doutorHorarioDTO.getDoutorHorario() != null) {
-//            Doutor doutor = new Doutor();
-//            doutor.setId(doutorHorarioDTO.getDoutorHorario().getId());
-//            novoDoutorHorario.setDoutorHorario(doutor);
-//        }
-//        return novoDoutorHorario;
-//    }
+    public DoutorHorario toDoutorHorario(DoutorHorarioDTO doutorHorarioDTO){
+        DoutorHorario novoDoutorHorario = new DoutorHorario();
+
+        novoDoutorHorario.setId(doutorHorarioDTO.getId());
+        novoDoutorHorario.setDiaSemana(doutorHorarioDTO.getDiaSemana());
+        novoDoutorHorario.setHorarioInicialManha(doutorHorarioDTO.getHorarioInicialManha());
+        novoDoutorHorario.setHorarioFinalManha(doutorHorarioDTO.getHorarioFinalManha());
+        novoDoutorHorario.setHorarioInicialTarde(doutorHorarioDTO.getHorarioInicialTarde());
+        novoDoutorHorario.setHorarioFinalTarde(doutorHorarioDTO.getHorarioFinalTarde());
+
+        if (doutorHorarioDTO.getDoutorId() != null) {
+            Doutor doutor = new Doutor();
+            doutor.setId(doutorHorarioDTO.getDoutorId().getId());
+            novoDoutorHorario.setDoutorId(doutor);
+        }
+        return novoDoutorHorario;
+    }
 }

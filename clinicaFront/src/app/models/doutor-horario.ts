@@ -1,7 +1,8 @@
 export class DoutorHorario {
+    id!: number;
     diaSemana!: number;
-    // horarioInicialManha!:,
-    // horarioFinalManha!:,
-    // horarioInicialTarde,
-    // horarioFinalTarde,
+    horarioInicialManha!: string;
+    horarioFinalManha!: string;
+    horarioInicialTarde!: string;
+    horarioFinalTarde!: string;
 }

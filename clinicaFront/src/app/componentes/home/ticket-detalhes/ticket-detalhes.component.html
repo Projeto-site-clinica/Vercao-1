@@ -2,11 +2,11 @@
     <p>{{ doutor.nome }}</p>
     <select #consultaInput="ngModel" required [compareWith]="byId" class="form-select" name="consulta" [(ngModel)]="ticket.consulta">
         <option [ngValue]="undefined">Selecione...</option>
-        <option *ngFor="let consultaItem of doutor?.consulta" [ngValue]="consultaItem">{{ consultaItem.nomeConsulta }}</option>
+        <option *ngFor="let consultaItem of doutor?.consultas" [ngValue]="consultaItem">{{ consultaItem.nomeConsulta }}</option>
     </select>
     
     <div>
-        <select #data="ngModel" required [compareWith]="byId" class="form-select" name="data" [(ngModel)]="ticket.data">
+        <select #data="ngModel" required [compareWith]="byId" class="form-select" name="data" [(ngModel)]="ticket.horario">
             <option [ngValue]="undefined">Selecione...</option>
             <option [ngValue]="data">10:00 AM</option>
         </select>
