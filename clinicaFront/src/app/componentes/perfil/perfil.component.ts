@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Clinica } from 'src/app/models/clinica';
 import { Consulta } from 'src/app/models/consulta';
 import { Doutor } from 'src/app/models/doutor';
+import { DoutorHorario } from 'src/app/models/doutor-horario';
 import { Mensagem } from 'src/app/models/mensagem';
 import { Paciente } from 'src/app/models/paciente';
 import { Secretaria } from 'src/app/models/secretaria';
@@ -45,6 +46,8 @@ export class PerfilComponent {
   consultaParaEditar: Consulta = new Consulta();
 
   constructor() {
+
+
     for (let i = 0; i < 100; i++) {
       this.modoEdicao.push(false);
     }
@@ -65,6 +68,25 @@ export class PerfilComponent {
 
   }
 
+
+  retornaDiaSemana(num: number) {
+    if (num == 1)
+      return "Dom";
+    else if (num == 2)
+      return "Seg";
+    else if (num == 3)
+      return "Ter";
+    else if (num == 4)
+      return "Qua";
+    else if (num == 5)
+      return "Qui";
+    else if (num == 6)
+      return "Sex";
+    else if (num == 7)
+      return "Sáb";
+    else return null;
+  }
+
   getPaciente(id: number) {
     this.pacienteService.buscarPorId(id).subscribe({
       next: objeito => {
@@ -77,10 +99,26 @@ export class PerfilComponent {
     })
   }
 
+
   getDoutor(id: number) {
     this.doutorService.buscarPorId(id).subscribe({
       next: objeito => {
+        console.log(`entrou`);
         this.doutor = objeito;
+
+        let qtdDias = 0;
+        if (this.doutor.horarios != null)
+          qtdDias = this.doutor.horarios.length;
+        else
+          this.doutor.horarios = [];
+
+        for (let i = 0; i < (7 - qtdDias); i++) {
+          let horario = new DoutorHorario();
+          horario.diaSemana = i + 1;
+          this.doutor.horarios.push(horario);
+        }
+
+
         console.log(this.doutor);
       },
       error: erro => {
@@ -136,7 +174,7 @@ export class PerfilComponent {
       this.getClinica(id);
     else if (this.loginService.getUser().role == "SECRETARIA")
       this.getSecretaria(id);
-    
+
     this.retorno.emit("ok");
   }
 
@@ -146,6 +184,21 @@ export class PerfilComponent {
       next: mensagem => {
         this.toastr.success(mensagem.mensagem);
         this.modoEdicao[posicao] = false;
+        console.log(mensagem);
+      },
+      error: erro => {
+        this.toastr.error(erro.error.mensagem);
+        console.error(erro);
+      }
+    });
+  }
+
+
+  salvarDoutor() {
+    console.log(this.doutor);
+    this.doutorService.save(this.doutor).subscribe({
+      next: mensagem => {
+        this.toastr.success(mensagem.mensagem);
         console.log(mensagem);
       },
       error: erro => {

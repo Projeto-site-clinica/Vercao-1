@@ -13,5 +13,5 @@ export class Doutor extends Usuario{
     solicitacao: boolean = false;
     clinica!: Clinica;
     consultas!: Consulta[];
-    horarios!: DoutorHorario[];
+    horarios: DoutorHorario[] = [];
 }

@@ -39,7 +39,7 @@ public class Doutor extends Usuario {
     @OneToMany(mappedBy = "doutorConsulta", cascade = CascadeType.ALL)
     private List<Consulta> consultas;
 
-    @OneToMany(mappedBy = "doutorHorario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doutorId", cascade = CascadeType.ALL)
     private List<DoutorHorario> horarios;
 
 //    @Column(name = "perfis")
