@@ -1,0 +1,43 @@
+img{
+    background-color: transparent;
+    border: none;
+    height: 2.2rem;
+    width: 2rem;
+}
+button{
+    background-color: transparent;
+    border: none;
+}
+button:hover{
+    border-radius: 45%;
+    background-color: #ccc;
+}
+label{
+    display: flex;
+    font-size: 20px;
+}
+.scroll{
+    max-height: 100%;
+    overflow-y: auto;
+}
+input:disabled{
+    border: none;
+    color: black;
+    background-color: #fff;
+}
+
+.alert{
+    padding: .2rem;
+    margin-bottom: .5rem;
+    display: flex;
+}
+.error{
+    border-color: red;
+}
+.error-color{
+    color: red;
+    font-size: 12px;
+}
+hr{
+    margin-top: 5px;
+}

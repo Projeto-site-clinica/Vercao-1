@@ -6,6 +6,9 @@ import { IndexComponent } from './componentes/layout/index/index.component';
 import { rotaguardGuard } from './guards/rotaguard.guard';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { DadosComponent } from './componentes/perfil/dados/dados.component';
+import { ServiciosComponent } from './componentes/perfil/servicios/servicios.component';
+import { HorariosComponent } from './componentes/perfil/horarios/horarios.component';
 
 
 const routes: Routes = [
@@ -19,15 +22,10 @@ const routes: Routes = [
     data: { roles: ['PACIENTE'] }, 
     children:[
     { path: "perfil", component:PerfilComponent },
+    { path: "perfil/dados", component:DadosComponent },
+    { path: "perfil/services", component:ServiciosComponent },
+    { path: "perfil/horarios", component:HorariosComponent },
     { path: "home", component:HomeComponent } 
-  ]},
-  { 
-    path: "", 
-    component:IndexComponent,
-    canActivate: [rotaguardGuard], 
-    data: { roles: ['DOUTOR'] }, 
-    children:[
-    { path: "perfil", component:PerfilComponent }
   ]}
 ];
 

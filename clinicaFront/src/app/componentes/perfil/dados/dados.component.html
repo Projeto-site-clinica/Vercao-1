@@ -1,0 +1,427 @@
+<div class="scroll">
+    <div *ngIf="loginService.getUser().role == 'PACIENTE'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+        <!-- <div class="d-flex justify-content-between col-lg-12 w-100"> -->
+        <div class="col-lg-5">
+            <label for="">Nome:</label>
+            <div class="d-flex align-items-center text-center justify-content-between">
+                <input #nome="ngModel" [class.error]="!nome.valid && nome.touched" [disabled]="modoEdicao[0] == false"
+                    class="m-0 p-0" [(ngModel)]="paciente.nome" />
+                <label *ngIf="!nome.valid && nome.touched" class="error-color">*Nome é obrigatório! {{ nome.valid }}, {{
+                    nome.touched }}</label>
+                <button *ngIf="modoEdicao[0] == false" (click)="modoEdicao[0] = !modoEdicao[0]"><img
+                        src="../../../assets/editar.svg"></button>
+                <button *ngIf="modoEdicao[0] == true" (click)="salvarPaciente(0)">Salvar</button>
+                <button *ngIf="modoEdicao[0] == true" (click)="modoEdicao[0] = !modoEdicao[0]">Cancelar</button>
+            </div>
+            <hr>
+        </div>
+        <!--  <div class="col-lg-5">
+                <label for="">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between" >
+                    <input #cpf="ngModel" required [class.error]="!cpf.valid && cpf.touched" [disabled]="modoEdicao[1] == false" class="m-0 p-0" [(ngModel)]="paciente.cpf"/>
+                    <button *ngIf="modoEdicao[1] == false" (click)="modoEdicao[1] = !modoEdicao[1]"><img src="../../../assets/editar.svg"></button>
+                    <button *ngIf="modoEdicao[1] == true" (click)="salvarPaciente(1)">Salvar</button>
+                    <button *ngIf="modoEdicao[1] == true" (click)="modoEdicao[1] = !modoEdicao[1]">Cancelar</button>
+                </div>
+                <label *ngIf="!cpf.valid && cpf.touched" class="error-color">*CPF é obrigatório!</label>
+                <hr>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">RG:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <input #rg="ngModel" required [class.error]="!rg.valid && rg.touched" [disabled]="modoEdicao[2] == false" class="m-0 p-0" [(ngModel)]="paciente.rg"/>
+                    <button *ngIf="modoEdicao[2] == false" (click)="modoEdicao[2] = !modoEdicao[2]"><img src="../../../assets/editar.svg"></button>
+                    <button *ngIf="modoEdicao[2] == true" (click)="salvarPaciente(2)">Salvar</button>
+                    <button *ngIf="modoEdicao[2] == true" (click)="modoEdicao[2] = !modoEdicao[2]">Cancelar</button>
+                </div>
+                <label *ngIf="!rg.valid && rg.touched" class="error-color">*RG é obrigatório!</label>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <input #email="ngModel" required [class.error]="!email.valid && email.touched" [disabled]="modoEdicao[3] == false" class="m-0 p-0" [(ngModel)]="paciente.email"/>
+                    <button *ngIf="modoEdicao[3] == false" (click)="modoEdicao[3] = !modoEdicao[3]"><img src="../../../assets/editar.svg"></button>
+                    <button *ngIf="modoEdicao[3] == true" (click)="salvarPaciente(3)">Salvar</button>
+                    <button *ngIf="modoEdicao[3] == true" (click)="modoEdicao[3] = !modoEdicao[3]">Cancelar</button>
+                </div>
+                <label *ngIf="!email.valid && email.touched" class="error-color">*E-mail é obrigatório!</label>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <input #celular="ngModel" required [class.error]="!celular.valid && celular.touched" [disabled]="modoEdicao[4] == false" class="m-0 p-0" [(ngModel)]="paciente.celular"/>
+                    <button *ngIf="modoEdicao[4] == false" (click)="modoEdicao[4] = !modoEdicao[4]"><img src="../../../assets/editar.svg"></button>
+                    <button *ngIf="modoEdicao[4] == true" (click)="salvarPaciente(4)">Salvar</button>
+                    <button *ngIf="modoEdicao[4] == true" (click)="modoEdicao[4] = !modoEdicao[4]">Cancelar</button>
+                </div>
+                <label *ngIf="!celular.valid && celular.touched" class="error-color">*Celular é obrigatório!</label>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <input #cep="ngModel" required [class.error]="!cep.valid && cep.touched" [disabled]="modoEdicao[5] == false" class="m-0 p-0" [(ngModel)]="paciente.cep"/>
+                    <button *ngIf="modoEdicao[5] == false" (click)="modoEdicao[5] = !modoEdicao[5]"><img src="../../../assets/editar.svg"></button>
+                    <button *ngIf="modoEdicao[5] == true" (click)="salvarPaciente(5)">Salvar</button>
+                    <button *ngIf="modoEdicao[5] == true" (click)="modoEdicao[5] = !modoEdicao[5]">Cancelar</button>
+                </div>
+                <label *ngIf="!cep.valid && cep.touched" class="error-color">*Cep é obrigatório!</label>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.rua }}</p>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.numero }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.bairro }}</p>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.cidade }}</p>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.estado }}</p>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ paciente.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div> -->
+    </div>
+
+    <div *ngIf="loginService.getUser().role == 'DOUTOR'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.nome }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cpf }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">RG:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.rg }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Formação:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.formacao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.email }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.celular }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cep }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.rua }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.numero }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.bairro }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.cidade }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.estado }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Perfil visualizado</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Descrição:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.descricao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Avaliação:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ doutor.avaliacao }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="loginService.getUser().role == 'CLINICA'"
+        class="col-lg-12 w-100 container d-flex flex-column justify-content-center m-0 align-items-center mt-2">
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Nome:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.nome }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">CPF:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cnpj }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">E-mail:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.email }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Celular:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.celular }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="w-100 col-lg-12 mt-4">
+            <h3 class="form-label">Endereço</h3>
+            <hr>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Cep:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cep }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Rua:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.rua }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Número:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.numero }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-3">
+                <label class="form-label">Bairro:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.bairro }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Cidade:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.cidade }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-3">
+                <label class="form-label">Estado:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.estado }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between col-lg-12 w-100">
+            <div class="col-lg-5">
+                <label class="form-label">Complemento:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.complemento }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-5">
+                <label class="form-label">Referençia:</label>
+                <div class="d-flex align-items-center text-center justify-content-between">
+                    <p class="m-0 p-0">{{ clinica.referencia }}</p>
+                    <button><img src="../../../assets/editar.svg"></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

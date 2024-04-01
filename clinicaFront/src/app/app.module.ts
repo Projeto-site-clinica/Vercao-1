@@ -21,6 +21,9 @@ import { AgendamentosComponent } from './componentes/agendamentos/agendamentos.c
 import { ConsultaDetalhesComponent } from './componentes/perfil/consulta-detalhes/consulta-detalhes.component';
 import { DoutorPerfilComponent } from './componentes/home/doutor-perfil/doutor-perfil.component';
 import { TicketDetalhesComponent } from './componentes/home/ticket-detalhes/ticket-detalhes.component';
+import { ServiciosComponent } from './componentes/perfil/servicios/servicios.component';
+import { DadosComponent } from './componentes/perfil/dados/dados.component';
+import { HorariosComponent } from './componentes/perfil/horarios/horarios.component';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import { TicketDetalhesComponent } from './componentes/home/ticket-detalhes/tick
     ConsultaDetalhesComponent,
     DoutorPerfilComponent,
     TicketDetalhesComponent,
+    ServiciosComponent,
+    DadosComponent,
+    HorariosComponent,
   ],
   imports: [
     BrowserModule,

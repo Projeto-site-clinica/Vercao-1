@@ -35,11 +35,33 @@ public class DoutorHorarioService {
         return new MensagemDTO("Horário cadastrado com sucesso!", HttpStatus.CREATED);
     }
     public MensagemDTO editarDoutorHorario(Long id, DoutorHorarioDTO doutorHorarioDTO) {
+//        String horaMinutos = String.valueOf(doutorHorarioDTO.getHorarioInicialManha());
+//        int hora = Integer.parseInt(horaMinutos.split(":")[0]);
+//        int minutos = Integer.parseInt(horaMinutos.split(":")[1]);
+//
+//        // Criar um objeto LocalTime
+//        LocalTime localTime = LocalTime.of(hora, minutos);
+//
+//        // Definir uma data fixa para a criação do Timestamp (por exemplo, hoje)
+//        LocalDate hoje = LocalDate.now();
+//
+//        // Combinação de data e hora
+//        LocalDateTime localDateTime = LocalDateTime.of(hoje, localTime);
+//
+//        // Converter para Timestamp
+//        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+//        LocalTime localTime = LocalTime.parse((CharSequence) doutorHorarioDTO.getHorarioInicialManha(), formatter);
+//
+//        Timestamp timestamp = Timestamp.valueOf(localTime.atDate(java.time.LocalDate.now()));
+
         DoutorHorario doutorHorario = toDoutorHorario(doutorHorarioDTO);
+
         doutorHorarioRepository.save(doutorHorario);
         return new MensagemDTO("Horário atualizado com sucesso!", HttpStatus.CREATED);
     }
-
     public MensagemDTO deletarDoutorHorario(Long id) {
         DoutorHorario doutorBanco = doutorHorarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Doutor com ID " + id + " não existe!"));

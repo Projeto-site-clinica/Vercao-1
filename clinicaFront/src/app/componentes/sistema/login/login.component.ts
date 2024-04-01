@@ -23,7 +23,7 @@ export class LoginComponent {
     this.loginService.logar(this.login).subscribe({
       next: usuario => {
         this.loginService.addToken(usuario.token);
-        this.roteador.navigate(['perfil']);
+        this.roteador.navigate(['home']);
       },
       error: erro => {
         !this.toastr.error(erro.error.mensagem);

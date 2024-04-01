@@ -1,10 +1,17 @@
 <nav class="d-flex justify-content-center pt-3 h-100 bg-body-secondary borda">
-    <div>
-        <section class="nav flex-column mt-5">
-            <button [ngClass]="{ 'active': (active == 1) }" class="mb-4" (click)="active = 1" routerLink="home">Home</button>
-            <button [ngClass]="{ 'active': (active == 2) }" class="mb-4" (click)="active = 2" routerLink="perfil">Perfil</button>
-            <button [ngClass]="{ 'active': (active == 3) }" class="mb-4" (click)="active = 3" routerLink="agendamentos">Agendamentos</button>
-            <button [ngClass]="{ 'active': (active == 4) }" class="mb-4" (click)="active = 4" routerLink="cadastrar">Usuários</button>
+    <div class="w-100 p-2">
+        <section class="nav flex-column mt-5 w-100">
+            <ul class="menu">
+                <li class="menu_item" (click)="navigateTo('home')" [class.active]="router.url === '/home'"><span class="m-2">Home</span></li>
+                <li class="menu_item" (click)="togglePerfilAccordion()">
+                    <span class="m-2">Perfil</span>
+                    <ul class="perfil" *ngIf="perfil">
+                        <li class="perfil_item" (click)="navigateTo('perfil/dados')" [class.active]="router.url === '/perfil/dados'">Dados</li>
+                        <li class="perfil_item" (click)="navigateTo('perfil/services')" [class.active]="router.url === '/perfil/services'">Serviços</li>
+                        <li class="perfil_item" (click)="navigateTo('perfil/horarios')" [class.active]="router.url === '/perfil/horarios'">Horários</li>
+                    </ul>
+                </li>
+            </ul>
             <a class="sair text-center" href="/#/login">Sair</a>
         </section>
     </div>
